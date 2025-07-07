@@ -8,8 +8,8 @@ public class Constants {
 
     public static List<String> clientList = Arrays.asList("coke","pepsi");
    // public static String INFLUX_TOKEN ="Token Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw==";
-    public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";
-    public static String INFLUX_ORG ="SaraOrg";//"f086a9856ff86826"
+    public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";
+    public static String INFLUX_ORG ="AxelOrg";//"f086a9856ff86826" //SaraOrg
     public static String INFLUX_BUCKET ="CrayonAudit";
     public static String INFLUX_URL ="http://localhost:8086";
     public static String INFLUX_URL_QUERY ="http://localhost:8086/api/v2/query";
