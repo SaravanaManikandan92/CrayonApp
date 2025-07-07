@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java-library'
+    id 'io.freefair.lombok' version '8.6'
+
+}
+description = "CrayonsApp"
+group 'com.crayon'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+    maven {
+        url 'https://plugins.gradle.org/m2/'
+    }
+
+}
+
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+    implementation 'org.apache.httpcomponents:httpcore:4.4.16'
+    implementation("com.fasterxml.jackson.core:jackson-core:2.19.0")
+    implementation("org.springframework.boot:spring-boot-starter-security:3.3.6")
+    implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.0.RELEASE")
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+
+    implementation("org.springframework.security:spring-security-oauth2-authorization-server:1.0.3")
+
+    // Password encoding
+    implementation 'org.springframework.security:spring-security-crypto'
+
+    implementation 'com.influxdb:influxdb-client-java:6.11.0'
+
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+// https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+}
+
+bootJar
+        {
+            archiveFileName = 'crayonapi.jar'
+            mainClass = 'com.crayon.boot.CrayonAppStarter'
+        }
+
+springBoot {
+    mainClass = 'com.crayon.boot.CrayonAppStarter'
+}
+
+bootRun {
+    systemProperties = System.properties
+    systemProperties['user.dir'] = project.rootDir.absolutePath
+}
