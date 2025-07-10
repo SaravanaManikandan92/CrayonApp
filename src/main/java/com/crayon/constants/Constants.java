@@ -15,12 +15,20 @@ public class Constants {
     public static String INFLUX_URL_QUERY ="http://localhost:8086/api/v2/query";
     public static String INFLUX_URL_WRITE ="http://localhost:8086/api/v2/write";
 
+    public static int ORGANIZATION_ID=4045755;
+    public static int PUBLISHER_ID=2;
+    public static int Magically_Genius_INVOICE_ID=207443;
+    public static int Outbox_Labs_INVOICE_ID=180723;
+
+    public static int MicroSaaS_Labs_INVOICE_ID=211425;
+    public static int Cheap_Inbox_INVOICE_ID=212451;
+
     public enum ClientDetails {
 
-        CLIENT_ID("CLIENT_ID", "33731c54-94b6-430b-872f-be0ca64f7bd5"),
-        CLIENT_SECRET("CLIENT_SECRET", "03ec3528-ebfb-4ec7-a43d-7b5e06df4b0d"),
-        USER_NAME("USER_NAME", "api@testcustomer.com"),
-        PASS_WORD("PASS_WORD", "ePLE8129087%"),
+        CLIENT_ID("CLIENT_ID", "bd131176-82c8-49cf-9c01-387d7ae11a80"),
+        CLIENT_SECRET("CLIENT_SECRET", "cbebba0a-d33f-4957-a796-d90c6ab06e81"),
+        USER_NAME("USER_NAME", "rsvp@axalingroup.com"),
+        PASS_WORD("PASS_WORD", "Axalingroup@2025"),
         GRANT_TYPE("","password"),
         SCOPE("","CustomerApi"),
         CRAYON_TOKEN_API_URL("CRAYON_TOKEN_API_URL", "https://api.crayon.com/api/v1/connect/token"),
