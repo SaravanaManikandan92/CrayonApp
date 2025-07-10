@@ -120,7 +120,8 @@ public class CrayonService {
     public Tenant getTenantById(String id,String source) {
         try {
             String url = Constants.ClientDetails.CRAYON_GET_TENANT_BY_ID.getValue();
-            url.replace("{id}",id);
+            url=url+id;
+           // url.replace("{id}",id);
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
@@ -135,14 +136,15 @@ public class CrayonService {
             return response_;
         } catch (Exception ex) {
             Utility.logHere(source,id,null,"exception",null);
-            throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
+            throw new InternalException("Something went wrong while getTenantById " + ex.getMessage());
         }
     }
 
     public SubscriptionResponse getSubscriptionById(String id, String source) {
         try {
             String url = Constants.ClientDetails.CRAYON_GET_SUBSCRIPTION_BY_ID.getValue();
-            url.replace("{id}",id);
+            url=url+id;
+            // url.replace("{id}",id);
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());

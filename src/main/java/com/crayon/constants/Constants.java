@@ -36,8 +36,8 @@ public class Constants {
         CRAYON_TOKEN_CONSENT_AGREEMENT_URL("","https://api.crayon.com/api/v1/customertenants/{id}/agreements"),
         CRAYON_TOKEN_ASSIGN_AGREEMENT_URL("","https://api.crayon.com/api/v1/subscriptions/"),
         CRAYON_TOKEN_ASSIGN_AGREEMENT_BY_NEW_COMMERCE_URL("","https://api.crayon.com/api/v1/subscriptions/new-commerce-orders"),
-        CRAYON_GET_TENANT_BY_ID("","https://api.crayon.com/api/v1/customertenants/{id}/"),
-        CRAYON_GET_SUBSCRIPTION_BY_ID("","https://api.crayon.com/api/v1/subscriptions/{id}/")
+        CRAYON_GET_TENANT_BY_ID("","https://api.crayon.com/api/v1/customertenants/"),
+        CRAYON_GET_SUBSCRIPTION_BY_ID("","https://api.crayon.com/api/v1/subscriptions/")
         ;
 
 
