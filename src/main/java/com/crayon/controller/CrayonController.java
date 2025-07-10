@@ -52,12 +52,12 @@ public class CrayonController {
     }
 
 
-    @GetMapping("/getCustomerTenantById")
+    @GetMapping("/getCustomerTenantById/{id}")
     public Tenant getTenantById(@PathVariable String id, @RequestParam String source) {
         return crayonService.getTenantById(id,source);
     }
 
-    @GetMapping("/getSubscriptionById")
+    @GetMapping("/getSubscriptionById/{id}")
     public SubscriptionResponse getSubscriptionById(@PathVariable String id, @RequestParam String source) {
         return crayonService.getSubscriptionById(id,source);
     }
