@@ -353,7 +353,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
         String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -1d)\n" +
+                "  |> range(start: -365d)\n" +
                 "  |> filter(fn: (r) => r._measurement == \"createCustomerTenantReqResp\")\n" +
                 "  |> filter(fn: (r) => r.source == \"" + source + "\")";
         if (trackingId != null) {
@@ -402,7 +402,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
         String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -1d)\n" +
+                "  |> range(start: -365d)\n" +
                 "  |> filter(fn: (r) => r._measurement == \"consentAgreementReqResp\")\n" +
                 "  |> filter(fn: (r) => r.source == \"" + source + "\")";
         if (trackingId != null) {
@@ -452,7 +452,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
         String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -1d)\n" +
+                "  |> range(start: -365d)\n" +
                 "  |> filter(fn: (r) => r._measurement == \"assignSubscriptionReqResp\")\n" +
                 "  |> filter(fn: (r) => r.source == \"" + source + "\")";
         if (trackingId != null) {
@@ -517,7 +517,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
         String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -1d)\n" +
+                "  |> range(start: -365d)\n" +
                 "  |> filter(fn: (r) => r._measurement == \"assignSubscriptionNewCommerceReqResp\")\n" +
                 "  |> filter(fn: (r) => r.source == \"" + source + "\")";
         if (trackingId != null) {
@@ -565,7 +565,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
         String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -1d)\n" +
+                "  |> range(start: -365d)\n" +
                 "  |> filter(fn: (r) => r._measurement == \"getTenantById\")\n" +
                 "  |> filter(fn: (r) => r.source == \"" + source + "\")";
         if (trackingId != null) {
@@ -611,7 +611,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
         String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -1d)\n" +
+                "  |> range(start: -365d)\n" +
                 "  |> filter(fn: (r) => r._measurement == \"getSubscriptionById\")\n" +
                 "  |> filter(fn: (r) => r.source == \"" + source + "\")";
         if (trackingId != null) {
