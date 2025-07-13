@@ -1,5 +1,6 @@
 package com.crayon.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -18,6 +19,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Tenant {
     public Tenant() {
     }
@@ -53,7 +55,7 @@ public class Tenant {
     @NotNull(message =  "CustomerTenantType is required")
     @Valid
     @JsonProperty("CustomerTenantType")
-    private String customerTenantType;
+    private int customerTenantType;
 
     @JsonProperty("EntityStatus")
     private String entityStatus;

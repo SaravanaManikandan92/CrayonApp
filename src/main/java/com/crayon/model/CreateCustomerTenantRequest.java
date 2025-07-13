@@ -1,6 +1,7 @@
 package com.crayon.model;
 
 import com.crayon.validator.ValidSource;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreateCustomerTenantRequest {
 
     public CreateCustomerTenantRequest()

@@ -1,12 +1,14 @@
 package com.crayon.model;
 
 import com.crayon.validator.ValidSource;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AssignSubscriptionByNewCommerce {
 
     public AssignSubscriptionByNewCommerce(){}
