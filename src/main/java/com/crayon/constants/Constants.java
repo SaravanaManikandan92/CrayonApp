@@ -1,15 +1,18 @@
 package com.crayon.constants;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Constants {
 
 
     public static List<String> clientList = Arrays.asList("Magically_Genius","Outbox_Labs","MicroSaaS_Labs","Cheap_Inbox");
-   // public static String INFLUX_TOKEN ="Token Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw==";
-    public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";
-    public static String INFLUX_ORG ="AxelOrg";//"f086a9856ff86826" //SaraOrg
+  //  public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw==";
+    public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA=="; //
+ //   public static String INFLUX_ORG ="SaraOrg";//"f086a9856ff86826" // //AxelOrg
+    public static String INFLUX_ORG ="AxelOrg";
     public static String INFLUX_BUCKET ="CrayonAudit";
     public static String INFLUX_URL ="http://localhost:8086";
     public static String INFLUX_URL_QUERY ="http://localhost:8086/api/v2/query";
@@ -23,6 +26,23 @@ public class Constants {
     public static int MicroSaaS_Labs_INVOICE_ID=211425;
     public static int Cheap_Inbox_INVOICE_ID=212451;
 
+    public static final Map<Integer, Integer> baseMonthDateMap = Map.ofEntries(
+            Map.entry(1, 31),
+            Map.entry(2, 28), // default February
+            Map.entry(3, 31),
+            Map.entry(4, 30),
+            Map.entry(5, 31),
+            Map.entry(6, 30),
+            Map.entry(7, 31),
+            Map.entry(8, 31),
+            Map.entry(9, 30),
+            Map.entry(10, 31),
+            Map.entry(11, 30),
+            Map.entry(12, 31)
+    );
+
+
+    //https://api.crayon.com/api/
     public enum ClientDetails {
 
         CLIENT_ID("CLIENT_ID", "bd131176-82c8-49cf-9c01-387d7ae11a80"),
@@ -31,13 +51,14 @@ public class Constants {
         PASS_WORD("PASS_WORD", "Axalingroup@2025"),
         GRANT_TYPE("","password"),
         SCOPE("","CustomerApi"),
-        CRAYON_TOKEN_API_URL("CRAYON_TOKEN_API_URL", "https://api.crayon.com/api/v1/connect/token"),
-        CRAYON_TOKEN_CREATE_TENANT_API_URL("CRAYON_TOKEN_CREATE_TENANT_API_URL","https://api.crayon.com/api/v1/customertenants/"),
-        CRAYON_TOKEN_CONSENT_AGREEMENT_URL("","https://api.crayon.com/api/v1/customertenants/{id}/agreements"),
-        CRAYON_TOKEN_ASSIGN_AGREEMENT_URL("","https://api.crayon.com/api/v1/subscriptions/"),
-        CRAYON_TOKEN_ASSIGN_AGREEMENT_BY_NEW_COMMERCE_URL("","https://api.crayon.com/api/v1/subscriptions/new-commerce-orders"),
-        CRAYON_GET_TENANT_BY_ID("","https://api.crayon.com/api/v1/customertenants/"),
-        CRAYON_GET_SUBSCRIPTION_BY_ID("","https://api.crayon.com/api/v1/subscriptions/")
+        CRAYON_BASE_URL("CRAYON_BASE_URL","https://api.crayon.com/api/"),
+        CRAYON_TOKEN_API_URL("CRAYON_TOKEN_API_URL", "v1/connect/token"),
+        CRAYON_TOKEN_CREATE_TENANT_API_URL("CRAYON_TOKEN_CREATE_TENANT_API_URL","v1/customertenants/"),
+        CRAYON_TOKEN_CONSENT_AGREEMENT_URL("","v1/customertenants/{id}/agreements"),
+        CRAYON_TOKEN_ASSIGN_AGREEMENT_URL("","v1/subscriptions/"),
+        CRAYON_TOKEN_ASSIGN_AGREEMENT_BY_NEW_COMMERCE_URL("","v1/subscriptions/new-commerce-orders"),
+        CRAYON_GET_TENANT_BY_ID("","v1/customertenants/"),
+        CRAYON_GET_SUBSCRIPTION_BY_ID("","v1/subscriptions/")
         ;
 
 

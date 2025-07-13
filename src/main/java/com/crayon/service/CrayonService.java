@@ -27,7 +27,7 @@ public class CrayonService {
 
     public CreateCustomerTenantResponse createTenant(CreateCustomerTenantRequest createCustomerTenantRequest) {
         try {
-            String url = Constants.ClientDetails.CRAYON_TOKEN_CREATE_TENANT_API_URL.getValue();
+            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue() +Constants.ClientDetails.CRAYON_TOKEN_CREATE_TENANT_API_URL.getValue();
             Utility.generateAndSetTrackingId(createCustomerTenantRequest);
             Utility.logHere(createCustomerTenantRequest,"request",null,null);
             HttpHeaders httpHeaders = new HttpHeaders();
@@ -51,7 +51,7 @@ public class CrayonService {
 
     public ConsentAgreement consentAgreement(String id,ConsentAgreement consentAgreement) {
         try {
-            String url = Constants.ClientDetails.CRAYON_TOKEN_CONSENT_AGREEMENT_URL.getValue();
+            String url =Constants.ClientDetails.CRAYON_BASE_URL.getValue()+ Constants.ClientDetails.CRAYON_TOKEN_CONSENT_AGREEMENT_URL.getValue();
             url.replace("{id}",id);
             Utility.generateAndSetTrackingId(consentAgreement);
             HttpHeaders httpHeaders = new HttpHeaders();
@@ -75,7 +75,7 @@ public class CrayonService {
 
     public AssignedSubscriptionResponse createAssignment(AssignSubscription assignSubscription) {
         try {
-            String url = Constants.ClientDetails.CRAYON_TOKEN_ASSIGN_AGREEMENT_URL.getValue();
+            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_TOKEN_ASSIGN_AGREEMENT_URL.getValue();
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
@@ -98,7 +98,7 @@ public class CrayonService {
 
     public AssignSubscriptionByNewCommerceResponse createAssignmentByNewCommerceId(AssignSubscriptionByNewCommerce assignSubscription) {
         try {
-            String url = Constants.ClientDetails.CRAYON_TOKEN_ASSIGN_AGREEMENT_BY_NEW_COMMERCE_URL.getValue();
+            String url =  Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_TOKEN_ASSIGN_AGREEMENT_BY_NEW_COMMERCE_URL.getValue();
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
@@ -119,9 +119,8 @@ public class CrayonService {
 
     public Tenant getTenantById(String id,String source) {
         try {
-            String url = Constants.ClientDetails.CRAYON_GET_TENANT_BY_ID.getValue();
+            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_GET_TENANT_BY_ID.getValue();
             url=url+id;
-           // url.replace("{id}",id);
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
@@ -142,9 +141,8 @@ public class CrayonService {
 
     public SubscriptionResponse getSubscriptionById(String id, String source) {
         try {
-            String url = Constants.ClientDetails.CRAYON_GET_SUBSCRIPTION_BY_ID.getValue();
+            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_GET_SUBSCRIPTION_BY_ID.getValue();
             url=url+id;
-            // url.replace("{id}",id);
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
@@ -163,9 +161,9 @@ public class CrayonService {
         }
     }
 
-    public List<CreateCustomerTenantReqResp> GetCreateCustomerTenantReqRespBySource(String source,String trackingId) {
+    public List<CreateCustomerTenantReqResp> GetCreateCustomerTenantReqRespBySource(String source,String trackingId,String date,String month,String year) {
         try {
-            return Utility.getBySourceInCreateCustomerTenantReqResp(source,trackingId);
+            return Utility.getBySourceInCreateCustomerTenantReqResp(source,trackingId,date,month,year);
         } catch (Exception ex) {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }
@@ -173,9 +171,9 @@ public class CrayonService {
     }
 
 
-    public List<ConsentAgreementReqResp> GetBySourceInConsentAgreementReqResp(String source,String trackingId) {
+    public List<ConsentAgreementReqResp> GetBySourceInConsentAgreementReqResp(String source,String trackingId,String date,String month,String year) {
         try {
-            return Utility.getBySourceInConsentAgreementReqResp(source,trackingId);
+            return Utility.getBySourceInConsentAgreementReqResp(source,trackingId,date,month,year);
         } catch (Exception ex) {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }
@@ -183,9 +181,9 @@ public class CrayonService {
     }
 
 
-    public List<AssignSubscriptionReqResp> GetBySourceInAssignSubscriptionReqResp(String source,String trackingId) {
+    public List<AssignSubscriptionReqResp> GetBySourceInAssignSubscriptionReqResp(String source,String trackingId,String date,String month,String year) {
         try {
-            return Utility.getBySourceInAssignSubscriptionReqResp(source,trackingId);
+            return Utility.getBySourceInAssignSubscriptionReqResp(source,trackingId,date,month,year);
         } catch (Exception ex) {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }
@@ -193,28 +191,28 @@ public class CrayonService {
     }
 
 
-    public List<AssignSubscriptionByNewCommerceLogResponse> GetBySourceInAssignSubscriptionNewCommerceReqResp(String source, String trackingId) {
+    public List<AssignSubscriptionByNewCommerceLogResponse> GetBySourceInAssignSubscriptionNewCommerceReqResp(String source, String trackingId,String date,String month,String year) {
         try {
-            return Utility.getBySourceInAssignSubscriptionNewCommerceReqResp(source,trackingId);
+            return Utility.getBySourceInAssignSubscriptionNewCommerceReqResp(source,trackingId,date,month,year);
         } catch (Exception ex) {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }
     }
 
 
-    public List<TenantResponse> GetBySourceInGetByTenantId(String source,String trackingId) {
+    public List<TenantResponse> GetBySourceInGetByTenantId(String source,String trackingId,String date,String month,String year) {
         try {
-            return Utility.getBySourceInGetByTenantId(source,trackingId);
+            return Utility.getBySourceInGetByTenantId(source,trackingId,date,month,year);
         } catch (Exception ex) {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }
 
     }
 
-    public List<SubscriptionLogResponse> getBySourceInGetBySubscriptionId(String source,String trackingId) {
+    public List<SubscriptionLogResponse> getBySourceInGetBySubscriptionId(String source,String trackingId,String date,String month,String year) {
         try {
-            return Utility.getBySourceInGetBySubscriptionId(source,trackingId);
-        } catch (Exception ex) {
+            return Utility.getBySourceInGetBySubscriptionId(source,trackingId,date,month,year);
+         } catch (Exception ex) {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }
 

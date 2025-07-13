@@ -63,49 +63,49 @@ public class CrayonController {
     }
 
     @GetMapping("/getCreateCustomerTenantReqRespBySource")
-    public ResponseEntity<List<CreateCustomerTenantReqResp>> GetCreateCustomerTenantReqRespBySource(@RequestParam(value="source") String source,String trackingId) {
+    public ResponseEntity<List<CreateCustomerTenantReqResp>> GetCreateCustomerTenantReqRespBySource(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
 
-        List<CreateCustomerTenantReqResp> resp=crayonService.GetCreateCustomerTenantReqRespBySource(source,trackingId);
+        List<CreateCustomerTenantReqResp> resp=crayonService.GetCreateCustomerTenantReqRespBySource(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
 
     }
 
     @GetMapping("/getBySourceInConsentAgreementReqResp")
-    public ResponseEntity<List<ConsentAgreementReqResp>> GetBySourceInConsentAgreementReqResp(@RequestParam(value="source") String source,String trackingId) {
+    public ResponseEntity<List<ConsentAgreementReqResp>> GetBySourceInConsentAgreementReqResp(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
 
-        List<ConsentAgreementReqResp> resp=crayonService.GetBySourceInConsentAgreementReqResp(source,trackingId);
+        List<ConsentAgreementReqResp> resp=crayonService.GetBySourceInConsentAgreementReqResp(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
 
     }
 
     @GetMapping("/getBySourceInAssignSubscriptionReqResp")
-    public ResponseEntity<List<AssignSubscriptionReqResp>> GetBySourceInAssignSubscriptionReqResp(@RequestParam(value="source") String source,String trackingId) {
+    public ResponseEntity<List<AssignSubscriptionReqResp>> GetBySourceInAssignSubscriptionReqResp(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
 
-        List<AssignSubscriptionReqResp> resp=crayonService.GetBySourceInAssignSubscriptionReqResp(source,trackingId);
+        List<AssignSubscriptionReqResp> resp=crayonService.GetBySourceInAssignSubscriptionReqResp(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
 
     }
 
     @GetMapping("/getBySourceInAssignSubscriptionNewCommerceReqResp")
-    public ResponseEntity<List<AssignSubscriptionByNewCommerceLogResponse>> GetBySourceInAssignSubscriptionNewCommerceReqResp(@RequestParam(value="source") String source,String trackingId) {
+    public ResponseEntity<List<AssignSubscriptionByNewCommerceLogResponse>> GetBySourceInAssignSubscriptionNewCommerceReqResp(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
 
-        List<AssignSubscriptionByNewCommerceLogResponse> resp=crayonService.GetBySourceInAssignSubscriptionNewCommerceReqResp(source,trackingId);
+        List<AssignSubscriptionByNewCommerceLogResponse> resp=crayonService.GetBySourceInAssignSubscriptionNewCommerceReqResp(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
 
     }
 
     @GetMapping("/getBySourceInGetByTenantId")
-    public ResponseEntity< List<TenantResponse>> GetBySourceInGetByTenantId(String source,String trackingId) {
+    public ResponseEntity< List<TenantResponse>> GetBySourceInGetByTenantId(String source,String trackingId,String date,String month,String year) {
 
-        List<TenantResponse> resp=crayonService.GetBySourceInGetByTenantId(source,trackingId);
+        List<TenantResponse> resp=crayonService.GetBySourceInGetByTenantId(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
 
     }
 
     @GetMapping("/getBySourceInGetBySubscriptionId")
-    public ResponseEntity< List<SubscriptionLogResponse>> getBySourceInGetBySubscriptionId(String source,String trackingId) {
+    public ResponseEntity< List<SubscriptionLogResponse>> getBySourceInGetBySubscriptionId(String source,String trackingId,String date,String month,String year) {
 
-        List<SubscriptionLogResponse> resp=crayonService.getBySourceInGetBySubscriptionId(source,trackingId);
+        List<SubscriptionLogResponse> resp=crayonService.getBySourceInGetBySubscriptionId(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
 
     }

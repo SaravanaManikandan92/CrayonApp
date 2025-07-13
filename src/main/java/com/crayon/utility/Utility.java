@@ -15,6 +15,10 @@ import com.influxdb.client.write.Point;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
 
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.ZoneOffset;
+import java.time.chrono.Chronology;
 import java.time.temporal.ChronoUnit;
 
 import java.time.Instant;
@@ -325,11 +329,12 @@ public class Utility {
                 ;
 
                 int i=0,j= 0;
-                for (String in : response.getSuspensionReasons()) {
-                    point.addField("suspensionReasons" + i, in);
-                    i++;
-
-                }
+               // if(response.getSuspensionReasons())
+//                for (String in : response.getSuspensionReasons()) {
+//                    point.addField("suspensionReasons" + i, in);
+//                    i++;
+//
+//                }
                 for (String in : response.getSubscriptions()) {
                     point.addField("subscriptions" + j, in);
                     j++;
@@ -347,20 +352,46 @@ public class Utility {
     }
 
 
-    public static List<CreateCustomerTenantReqResp> getBySourceInCreateCustomerTenantReqResp(String source, String trackingId) {
+    public static List<CreateCustomerTenantReqResp> getBySourceInCreateCustomerTenantReqResp(String source, String trackingId,String date,String month,String year) {
 
 
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
-        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -365d)\n" +
-                "  |> filter(fn: (r) => r._measurement == \"createCustomerTenantReqResp\")\n" +
-                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
+        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" ;
+
+        if (date != null && month==null) {
+
+            LocalDate localDate = LocalDate.parse(date);
+            Instant startOfDay = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: "+startOfDay.toString()+ ",stop: "+endOfDay.toString()+")\n"
+            ;
+        }
+        else if (month != null) {
+            int year_ = getYear(year);
+            month=Integer.parseInt(month)>9?month:"0"+month;
+            String currDate = year_ + "-" + month + "-01";
+            LocalDate localDate = LocalDate.parse(currDate);
+            Instant startOfMonth = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(getDaysInMonth(Integer.parseInt(month), year_)).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: " + startOfMonth.toString() + ",stop: " + endOfDay.toString() + ")\n"
+            ;
+        } else {
+            flux = flux +
+                    "  |> range(start: -365d)\n";
+        }
         if (trackingId != null) {
             flux = flux +
                     "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")"
             ;
         }
+
+         flux = flux +
+                "  |> filter(fn: (r) => r._measurement == \"createCustomerTenantReqResp\")\n" +
+                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
 
         QueryApi queryApi = InfluxDbFactory.getQueryApiInstance();
         List<FluxTable> tables = queryApi.query(flux, Constants.INFLUX_ORG);
@@ -396,19 +427,48 @@ public class Utility {
     }
 
 
-    public static List<ConsentAgreementReqResp> getBySourceInConsentAgreementReqResp(String source, String trackingId) {
+    public static List<ConsentAgreementReqResp> getBySourceInConsentAgreementReqResp(String source, String trackingId,String date,String month,String year) {
 
 
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
-        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -365d)\n" +
-                "  |> filter(fn: (r) => r._measurement == \"consentAgreementReqResp\")\n" +
-                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
+
+        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" ;
+
+        if (date != null && month==null) {
+
+            LocalDate localDate = LocalDate.parse(date);
+            Instant startOfDay = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: "+startOfDay.toString()+ ",stop: "+endOfDay.toString()+")\n"
+            ;
+        }
+        else if (month != null) {
+            int year_ = getYear(year);
+            month=Integer.parseInt(month)>9?month:"0"+month;
+            String currDate = year_ + "-" + month + "-01";
+            LocalDate localDate = LocalDate.parse(currDate);
+            Instant startOfMonth = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(getDaysInMonth(Integer.parseInt(month), year_)).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: " + startOfMonth.toString() + ",stop: " + endOfDay.toString() + ")\n"
+            ;
+        } else {
+            flux = flux +
+                    "  |> range(start: -365d)\n";
+        }
         if (trackingId != null) {
             flux = flux +
-                    "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")";
+                    "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")"
+            ;
         }
+
+         flux = flux +
+                "  |> filter(fn: (r) => r._measurement == \"consentAgreementReqResp\")\n" +
+                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
         QueryApi queryApi = InfluxDbFactory.getQueryApiInstance();
         List<FluxTable> tables = queryApi.query(flux, Constants.INFLUX_ORG);
 
@@ -446,20 +506,47 @@ public class Utility {
     }
 
 
-    public static List<AssignSubscriptionReqResp> getBySourceInAssignSubscriptionReqResp(String source, String trackingId) {
+    public static List<AssignSubscriptionReqResp> getBySourceInAssignSubscriptionReqResp(String source, String trackingId,String date,String month,String year) {
 
 
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
-        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -365d)\n" +
-                "  |> filter(fn: (r) => r._measurement == \"assignSubscriptionReqResp\")\n" +
-                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
+        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" ;
+
+        if (date != null && month==null) {
+
+            LocalDate localDate = LocalDate.parse(date);
+            Instant startOfDay = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: "+startOfDay.toString()+ ",stop: "+endOfDay.toString()+")\n"
+            ;
+        }
+        else if (month != null) {
+            int year_ = getYear(year);
+            month=Integer.parseInt(month)>9?month:"0"+month;
+            String currDate = year_ + "-" + month + "-01";
+            LocalDate localDate = LocalDate.parse(currDate);
+            Instant startOfMonth = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(getDaysInMonth(Integer.parseInt(month), year_)).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: " + startOfMonth.toString() + ",stop: " + endOfDay.toString() + ")\n"
+            ;
+        } else {
+            flux = flux +
+                    "  |> range(start: -365d)\n";
+        }
         if (trackingId != null) {
             flux = flux +
                     "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")"
             ;
         }
+
+        flux = flux +
+                "  |> filter(fn: (r) => r._measurement == \"assignSubscriptionReqResp\")\n" +
+                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
 
         QueryApi queryApi = InfluxDbFactory.getQueryApiInstance();
         List<FluxTable> tables = queryApi.query(flux, Constants.INFLUX_ORG);
@@ -513,18 +600,45 @@ public class Utility {
         return new ArrayList<>(grouped.values());
     }
 
-    public static List<AssignSubscriptionByNewCommerceLogResponse> getBySourceInAssignSubscriptionNewCommerceReqResp(String source, String trackingId) {
+    public static List<AssignSubscriptionByNewCommerceLogResponse> getBySourceInAssignSubscriptionNewCommerceReqResp(String source, String trackingId,String date,String month,String year) {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
-        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -365d)\n" +
-                "  |> filter(fn: (r) => r._measurement == \"assignSubscriptionNewCommerceReqResp\")\n" +
-                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
+        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" ;
+
+        if (date != null && month==null) {
+
+            LocalDate localDate = LocalDate.parse(date);
+            Instant startOfDay = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: "+startOfDay.toString()+ ",stop: "+endOfDay.toString()+")\n"
+            ;
+        }
+        else if (month != null) {
+            int year_ = getYear(year);
+            month=Integer.parseInt(month)>9?month:"0"+month;
+            String currDate = year_ + "-" + month + "-01";
+            LocalDate localDate = LocalDate.parse(currDate);
+            Instant startOfMonth = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(getDaysInMonth(Integer.parseInt(month), year_)).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: " + startOfMonth.toString() + ",stop: " + endOfDay.toString() + ")\n"
+            ;
+        } else {
+            flux = flux +
+                    "  |> range(start: -365d)\n";
+        }
         if (trackingId != null) {
             flux = flux +
                     "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")"
             ;
         }
+
+        flux = flux +
+                "  |> filter(fn: (r) => r._measurement == \"assignSubscriptionNewCommerceReqResp\")\n" +
+                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
 
         QueryApi queryApi = InfluxDbFactory.getQueryApiInstance();
         List<FluxTable> tables = queryApi.query(flux, Constants.INFLUX_ORG);
@@ -561,18 +675,43 @@ public class Utility {
         return new ArrayList<>(grouped.values());
     }
 
-    public static List<TenantResponse> getBySourceInGetByTenantId(String source, String trackingId) {
+    public static List<TenantResponse> getBySourceInGetByTenantId(String source, String trackingId,String date,String month,String year) {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
-        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -365d)\n" +
-                "  |> filter(fn: (r) => r._measurement == \"getTenantById\")\n" +
-                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
+        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" ;
+
+        if (date != null && month==null) {
+
+            LocalDate localDate = LocalDate.parse(date);
+            Instant startOfDay = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: "+startOfDay.toString()+ ",stop: "+endOfDay.toString()+")\n"
+            ;
+        }
+        else if (month != null) {
+            int year_ = getYear(year);
+            month=Integer.parseInt(month)>9?month:"0"+month;
+            String currDate = year_ + "-" + month + "-01";
+            LocalDate localDate = LocalDate.parse(currDate);
+            Instant startOfMonth = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(getDaysInMonth(Integer.parseInt(month), year_)).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: " + startOfMonth.toString() + ",stop: " + endOfDay.toString() + ")\n"
+            ;
+        } else {
+            flux = flux +
+                    "  |> range(start: -365d)\n";
+        }
         if (trackingId != null) {
             flux = flux +
                     "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")"
             ;
         }
+        flux = flux +
+                "  |> filter(fn: (r) => r._measurement == \"getTenantById\")\n" +
+                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
 
         QueryApi queryApi = InfluxDbFactory.getQueryApiInstance();
         List<FluxTable> tables = queryApi.query(flux, Constants.INFLUX_ORG);
@@ -607,19 +746,43 @@ public class Utility {
         return new ArrayList<>(grouped.values());
     }
 
-    public static List<SubscriptionLogResponse> getBySourceInGetBySubscriptionId(String source, String trackingId) {
+    public static List<SubscriptionLogResponse> getBySourceInGetBySubscriptionId(String source, String trackingId,String date,String month,String year) {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
         Point point = null;
-        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" +
-                "  |> range(start: -365d)\n" +
-                "  |> filter(fn: (r) => r._measurement == \"getSubscriptionById\")\n" +
-                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
+        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" ;
+
+        if (date != null && month==null) {
+
+            LocalDate localDate = LocalDate.parse(date);
+            Instant startOfDay = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: "+startOfDay.toString()+ ",stop: "+endOfDay.toString()+")\n"
+            ;
+        }
+        else if (month != null) {
+            int year_ = getYear(year);
+            month=Integer.parseInt(month)>9?month:"0"+month;
+            String currDate = year_ + "-" + month + "-01";
+            LocalDate localDate = LocalDate.parse(currDate);
+            Instant startOfMonth = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(getDaysInMonth(Integer.parseInt(month), year_)).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: " + startOfMonth.toString() + ",stop: " + endOfDay.toString() + ")\n"
+            ;
+        } else {
+            flux = flux +
+                    "  |> range(start: -365d)\n";
+        }
         if (trackingId != null) {
             flux = flux +
                     "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")"
             ;
         }
-
+        flux =flux +
+                "  |> filter(fn: (r) => r._measurement == \"getSubscriptionById\")\n" +
+                        "  |> filter(fn: (r) => r.source == \"" + source + "\")";
         QueryApi queryApi = InfluxDbFactory.getQueryApiInstance();
         List<FluxTable> tables = queryApi.query(flux, Constants.INFLUX_ORG);
 
@@ -721,5 +884,29 @@ public class Utility {
         assignedSubscriptionResponse.setSource(source);
     }
 
+
+    public static int getDaysInMonth(int month,int year) {
+
+        if (month == 2 && isLeapYear(year)) {
+            return 29;
+        }
+        return Constants.baseMonthDateMap.getOrDefault(month, 0);
+    }
+
+    public static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+
+
+    public static int getYear(String year){
+        int year_;
+        if(year==null){
+            year_=Year.now().getValue();
+        }
+        else{
+            year_=Integer.parseInt(year);
+        }
+        return year_;
+    }
 
 }

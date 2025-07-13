@@ -25,7 +25,7 @@ public class TokenService {
 
     public TokenResponse getAccessToken() {
         try {
-            String url = Constants.ClientDetails.CRAYON_TOKEN_API_URL.getValue();
+            String url =  Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_TOKEN_API_URL.getValue();
 
             String auth = Constants.ClientDetails.CLIENT_ID.getValue() + ":" + Constants.ClientDetails.CLIENT_SECRET.getValue();
             String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
