@@ -27,7 +27,9 @@ public class CrayonService {
 
     public CreateCustomerTenantResponse createTenant(CreateCustomerTenantRequest createCustomerTenantRequest) {
         try {
-            createCustomerTenantRequest.getTenant().getInvoiceProfile().setId(Constants.invoiceMap.get(createCustomerTenantRequest.getSource()));
+            InvoiceProfile invoiceProfile=new InvoiceProfile();
+            invoiceProfile.setId(Integer.parseInt(Constants.invoiceMap.get(createCustomerTenantRequest.getSource())));
+            createCustomerTenantRequest.getTenant().setInvoiceProfile(invoiceProfile);
             String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue() +Constants.ClientDetails.CRAYON_TOKEN_CREATE_TENANT_API_URL.getValue();
             Utility.generateAndSetTrackingId(createCustomerTenantRequest);
             Utility.logHere(createCustomerTenantRequest,"request",null,null);

@@ -13,7 +13,7 @@ public class InvoiceProfile {
     {}
 
     @JsonProperty("Id")
-    private String id;
+    private int id;
     @JsonProperty("Name")
     private String name;
 }
