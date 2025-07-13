@@ -46,7 +46,6 @@ public class ConsentAgreement {
     @JsonProperty("DateAgreed")
     private String dateAgreed;
 
-    @NotBlank(message="AgreementType should not be null")
     @JsonProperty("AgreementType")
     private int agreementType;
 }
