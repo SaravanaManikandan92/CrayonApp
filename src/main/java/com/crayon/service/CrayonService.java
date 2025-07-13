@@ -58,7 +58,7 @@ public class CrayonService {
     public ConsentAgreement consentAgreement(String id,ConsentAgreement consentAgreement) {
         try {
             String url =Constants.ClientDetails.CRAYON_BASE_URL.getValue()+ Constants.ClientDetails.CRAYON_TOKEN_CONSENT_AGREEMENT_URL.getValue();
-            url=url+id;
+            url=url+id+"/agreements";
             Utility.generateAndSetTrackingId(consentAgreement);
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
