@@ -1,0 +1,41 @@
+# === Gradle build files ===
+.gradle/
+build/
+
+# === IntelliJ IDEA ===
+.idea/
+*.iml
+
+# === Log files ===
+*.log
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+
+# === Java compile output ===
+out/
+bin/
+*.class
+
+# === Generated files ===
+*.jar
+*.war
+*.ear
+
+# === Temporary files ===
+*.tmp
+*.swp
+*.bak
+
+# === Node.js (if used) ===
+node_modules/
+
+# === Environment or secret files ===
+.env
+.env.*
+
+# === Cache / lock files ===
+**/build/
+**/.gradle/
+**/*.lock
