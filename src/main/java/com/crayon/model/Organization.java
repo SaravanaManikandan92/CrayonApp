@@ -16,7 +16,7 @@ public class Organization {
 
 
     @JsonProperty("Id")
-    private String id;
+    private int id;
 
     @JsonProperty("Name")
     private String name;

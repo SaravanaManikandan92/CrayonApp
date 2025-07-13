@@ -3,6 +3,7 @@ package com.crayon.service;
 import com.crayon.constants.Constants;
 import com.crayon.model.*;
 import com.crayon.utility.Utility;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.util.InternalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,9 @@ public class CrayonService {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
             HttpEntity<CreateCustomerTenantRequest> request = new HttpEntity<>(createCustomerTenantRequest, httpHeaders);
-
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(request);
+            System.out.println("Request JSON: " + json);
             ResponseEntity<CreateCustomerTenantResponse> response = restTemplate.postForEntity(url, request, CreateCustomerTenantResponse.class);
             CreateCustomerTenantResponse createCustomerTenantResponse=response.getBody();
             Utility.setTrackingIdAndSource(createCustomerTenantRequest.getSource(),createCustomerTenantRequest.getTrackingId(),createCustomerTenantResponse);
