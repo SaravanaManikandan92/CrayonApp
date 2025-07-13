@@ -1,17 +1,21 @@
 package com.crayon.constants;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Constants {
 
+    //
 
-    public static List<String> clientList = Arrays.asList("Magically_Genius","Outbox_Labs","MicroSaaS_Labs","Cheap_Inbox");
-  //  public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw==";
+    public static List<String> clientList = Arrays.asList("57747f5d-6758-4afa-9d65-0a3097b68389","dd636335-efbe-491b-b3b3-d8225c8dc1d1","6434afd2-811c-400c-ac13-d133b476086a","30b1b92c-cd3c-46c2-8375-de13cb5d20ae");
+  //  public static List<String> clientList = Arrays.asList("Magically_Genius","Outbox_Labs","MicroSaaS_Labs","Cheap_Inbox");
+  public static Map<String,String> clientListMap = Map.ofEntries(
+          Map.entry("57747f5d-6758-4afa-9d65-0a3097b68389", "Magically_Genius"),
+          Map.entry("dd636335-efbe-491b-b3b3-d8225c8dc1d1", "Outbox_Labs"), // default February
+          Map.entry("6434afd2-811c-400c-ac13-d133b476086a", "MicroSaaS_Labs"),
+          Map.entry("30b1b92c-cd3c-46c2-8375-de13cb5d20ae", "Cheap_Inbox"));
+    //public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw==";
     public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA=="; //
- //   public static String INFLUX_ORG ="SaraOrg";//"f086a9856ff86826" // //AxelOrg
+    //public static String INFLUX_ORG ="SaraOrg";//"f086a9856ff86826" // //AxelOrg
     public static String INFLUX_ORG ="AxelOrg";
     public static String INFLUX_BUCKET ="CrayonAudit";
     public static String INFLUX_URL ="http://localhost:8086";

@@ -33,7 +33,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();
         Point point = Point.measurement("createCustomerTenantReqResp");
         point
-                .addTag("source", createCustomerTenantRequest.getSource())
+                .addTag("source", Constants.clientListMap.get(createCustomerTenantRequest.getSource()))
                 .addTag("trackingId", createCustomerTenantRequest.getTrackingId())
                 .time(System.currentTimeMillis(), WritePrecision.MS);
         point
@@ -82,7 +82,7 @@ public class Utility {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();
         Point point = Point.measurement("consentAgreementReqResp");
         point
-                .addTag("source", consentAgreement.getSource())
+                .addTag("source", Constants.clientListMap.get(consentAgreement.getSource()))
                 .addTag("trackingId", consentAgreement.getTrackingId())
                 .time(System.currentTimeMillis(), WritePrecision.MS);
         point
@@ -123,7 +123,7 @@ public class Utility {
                                AssignedSubscriptionResponse assignedSubscriptionResponse, String exception) {
         Point point = Point.measurement("assignSubscriptionReqResp");
         point
-                .addTag("source", assignSubscription.getSource())
+                .addTag("source", Constants.clientListMap.get(assignSubscription.getSource()))
                 .addTag("trackingId", assignSubscription.getTrackingId())
                 .time(System.currentTimeMillis(), WritePrecision.MS);
         point
@@ -195,7 +195,7 @@ public class Utility {
                                AssignSubscriptionByNewCommerceResponse assignedSubscriptionResponse, String exception) {
         Point point = Point.measurement("assignSubscriptionNewCommerceReqResp");
         point
-                .addTag("source", assignSubscription.getSource())
+                .addTag("source", Constants.clientListMap.get(assignSubscription.getSource()))
                 .addTag("trackingId", assignSubscription.getTrackingId())
                 .time(System.currentTimeMillis(), WritePrecision.MS);
         point
