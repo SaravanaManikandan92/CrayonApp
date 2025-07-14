@@ -46,7 +46,7 @@ public class CrayonController {
         return crayonService.createAssignment(assignSubscription);
     }
 
-    @PostMapping("/assignSubsciptionByNewCommerce/{id}")
+    @PostMapping("/assignSubsciptionByNewCommerce")
     public AssignSubscriptionByNewCommerceResponse assignSubscriptionByNewCommerceId(@RequestBody @Valid AssignSubscriptionByNewCommerce assignSubscription) {
         return crayonService.createAssignmentByNewCommerceId(assignSubscription);
     }
