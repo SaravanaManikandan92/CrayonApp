@@ -18,7 +18,7 @@ public class Product {
 
 
    @NotBlank(message="PartNumber should not be null")
-   @JsonProperty("partNumber")
+   @JsonProperty("PartNumber")
    private String partNumber;
 
 
