@@ -29,25 +29,27 @@ public class AssignSubscription {
     private String trackingId;
 
     @NotBlank(message =  "Name is required")
-    @JsonProperty("Name")
+    @JsonProperty("name")
     private String name;
 
-    @JsonProperty("Quantity")
+    @JsonProperty("quantity")
     private int  quantity;
 
     @Valid
     @NotNull
+    @JsonProperty("customerTenant")
     private customerTenant customerTenant;
 
     @Valid
     @NotNull
+    @JsonProperty("product")
     private Product product;
 
-    @JsonProperty("BillingCycle")
+    @JsonProperty("billingCycle")
     private int  billingCycle;
 
     @NotBlank(message =  "TermDuration is required")
-    @JsonProperty("TermDuration")
+    @JsonProperty("termDuration")
     private String  termDuration;
 
 }
