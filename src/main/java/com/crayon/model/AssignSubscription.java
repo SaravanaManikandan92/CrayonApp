@@ -44,7 +44,6 @@ public class AssignSubscription {
     @NotNull
     private Product product;
 
-    @NotBlank(message =  "Quantity is required")
     @JsonProperty("billingCycle")
     private int  billingCycle;
 
