@@ -88,6 +88,9 @@ public class CrayonService {
             HttpEntity<AssignSubscription> request = new HttpEntity<>(assignSubscription, httpHeaders);
             Utility.generateAndSetTrackingId(assignSubscription);
             //Log here
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(request);
+            System.out.println("Request JSON: " + json);
             Utility.logHere(assignSubscription,"request",null,null);
             ResponseEntity<AssignedSubscriptionResponse> response = restTemplate.postForEntity(url, request, AssignedSubscriptionResponse.class);
             AssignedSubscriptionResponse assignedSubscriptionResponse= response.getBody();

@@ -16,7 +16,6 @@ import lombok.ToString;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class customerTenant {
 
-    @NotBlank(message="Id should not be null")
     @JsonProperty("id")
-    private String id;
+    private int id;
 }
