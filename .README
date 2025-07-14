@@ -1,0 +1,149 @@
+This docs talks about how to use the api :
+
+
+
+OAUTH TOKEN GENERATION:
+
+Use the below mentioned  api to generate oauth token which needs to be fed in the headers authorization of all the apis
+Invoke the http://api.axalingroup.com/oauth2/token
+
+Use the below curl to generate the token
+
+REQUEST:
+
+curl --location --request POST 'http://api.axalingroup.com/oauth2/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Basic Y3JheW9uQXBwOmNSYVkwTkFwcA==' \
+--header 'Cookie: JSESSIONID=8F8C7C0FBD6E59DBCBD9C95912B9D25E' \
+--data-urlencode 'grant_type=client_credentials'
+
+RESPONSE:
+
+{
+    "access_token": "eyJraWQiOiI2MWIxMmJkMy1iMTFjLTRiODYtOGQ5MC02Njc4OWVhNDQ1ZmEiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmF4YWxpbmdyb3VwLmNvbSIsInN1YiI6ImNyYXlvbkFwcCIsImF1ZCI6ImNyYXlvbkFwcCIsIm5iZiI6MTc1MjUxMzMwNywiZXhwIjoxNzUyNTE2OTA3LCJpYXQiOjE3NTI1MTMzMDd9.Yvk64BoxuATomuFELeEhfTto_2BXMYZX1yUUOBbQG0IvTGMko-nzOdM-ht5jaTsP9Ya1myhMzJDiDvsawaQErGBO61WIterZR-4cy541oFhkK7NXPI2ZjXON3TpwAyZaEjb8k-XYAcmTkY6XMQCd47LAmRG5tP6mkhTm2W7pNIVJpHdEAEpKRFMd8pkbWOCRAiPr5K30mYrL8JUJljb8Kq0salB4n1PuyBDL71VEutQX0kbbsb1m14Bx5UgwZ-kLSBJHVsuDpu6tN3z1fvuBxC1ErJyc_GMRK7gXlBZfcdYCpdPc2T0fSwJLMs7iV09M7RZ2lmKv9PBCBCjG26SBFg",
+    "token_type": "Bearer",
+    "expires_in": 3599
+}
+
+
+
+CreateCustomerTenant API:
+
+Use the below curl to createCustomerTenant,
+
+curl --location --request POST 'http://api.axalingroup.com/createCustomerTenant' \
+--header 'Authorization: Bearer eyJraWQiOiJkZTAzYzYzYy02ZWUzLTQ4MjUtYWJhOC1lN2E1NDlkNzAyZjAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmF4YWxpbmdyb3VwLmNvbSIsInN1YiI6ImNyYXlvbkFwcCIsImF1ZCI6ImNyYXlvbkFwcCIsIm5iZiI6MTc1MjQyODc3MSwiZXhwIjoxNzUyNDMyMzcxLCJpYXQiOjE3NTI0Mjg3NzF9.GniX151LZKOxcbhIvNaw8A2RkmuaGPXGXP_GqE0bvIhcM-wb2fH2CHbBBQxwMXPY47gDr4IBr0TxUxTusrX3RBPLNjlmedYHR4sG9jMUY0mnos0hh2VN5pfWxoflq7L0r7PfwrA5w-x7ipaBuoTqwx0mwYYBVP_WHwDUDgQVLdyBzclqCFZx1QFiINt1nJ3j8Eip6dc-Ve6VqlUun0oEYU6TJBe74H17mIm8aDoXMgQ3ftxBwU-Nk5E2izh82t0FO9KyIrZm8LJd-ujuRAtr-bSkMi24YE1FRzOgYjqNR67_BksiFUTZd6GZtO4XHJi0soB00NoS7whH-1U0gtkb5Q' \
+--header 'Content-Type: application/json' \
+--data-raw ' {
+ "source":"1d742172-6ea3-46d0-b83e-9553c5879414",
+  "Tenant": {
+    "Name": "Axalin Consultancy",
+    "Publisher": {
+      "Id": 2
+	  },
+    "DomainPrefix": "axalintest",
+    "CustomerTenantType": 2,
+    "Organization": {
+     "Id": 123456789
+    }
+  },
+ "Profile": {
+    "Contact": {
+      "FirstName": "Axalin Consultancy Services Pvt Ltd",
+      "LastName": "Lastname",
+      "Email": "axalinconsultancy@email.com",
+      "PhoneNumber": "000-12345689"
+    },
+    "Address": {
+      "FirstName": "Axalin Consultancy Services Pvt Ltd",
+      "LastName": "Lastname",
+      "AddressLine1": "9/1,3rd Cross, Greenwood Layout, 2nd Phase,Jinkethemanahalli",
+      "City": "Bangalore",
+      "Region": "Region",
+      "PostalCode": "560036",
+      "CountryCode": "India"
+    }
+  },
+  "Company": {
+    "OrganizationRegistrationNumber": "29AAECF0465D1ZU"
+  }
+}'
+
+Create ConsentAgreement API:
+
+Use the below curl to consent and agreement ,
+
+curl --location --request POST 'http://api.axalingroup.com/consentAgreement/123456' \
+--header 'Authorization: Bearer eyJraWQiOiJjOTc1ODM2Yi0xOTZjLTRlOTUtYTI2YS1iYzVhNDE1OTY5OWMiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmF4YWxpbmdyb3VwLmNvbSIsInN1YiI6ImNyYXlvbkFwcCIsImF1ZCI6ImNyYXlvbkFwcCIsIm5iZiI6MTc1MjQyOTg3NiwiZXhwIjoxNzUyNDMzNDc2LCJpYXQiOjE3NTI0Mjk4NzZ9.BGpWcMlqXdDzAkuJvtgoT9MOheB4HAAY-DLoqRj3l6sv03joA3xU1v6WXnCVG6cdChDMKxexuIRuTqQkIcX5OXXYzv3nlm1KRN1oKy2BAANSibYJeYgyXDucS2ed7I-rhliUZ3TVWDy8DnpNPcAMSjIfLt45vpikhz811lr5OHajF7guzRbpy6bFT57NhpK-bzIPehGFGx3q0rpb3WkpBZN55y_D4o9Welpm5KAUcEurjOb-JmLHELUK3VKe1uEhzjr5m2K4Y3VbEU2v0PgjxfBNkvTTYidHtjROXAVDP9XB5r_XV5x-fFpo8BcutiCN8AFQbdP_B33RRsHZN08vZw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+              "source":"1d742172-6ea3-46d0-b83e-9553c5879414",
+                "FirstName": "Nikil",
+                "LastName": "Nainwani",
+                "Email": "darsh@magicallygenius.ai",
+                "PhoneNumber": "8795415363",
+                "DateAgreed": "2025-07-10T20:03:26.880Z",
+                "AgreementType": 1
+    }
+'
+
+AssignSubsciption API:
+
+Use the below curl to assign subscription  api,
+
+
+curl --location --request POST 'http://api.axalingroup.com/assignSubsciption' \
+--header 'Authorization: Bearer eyJraWQiOiI2MWIxMmJkMy1iMTFjLTRiODYtOGQ5MC02Njc4OWVhNDQ1ZmEiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmF4YWxpbmdyb3VwLmNvbSIsInN1YiI6ImNyYXlvbkFwcCIsImF1ZCI6ImNyYXlvbkFwcCIsIm5iZiI6MTc1MjUxMzMwNywiZXhwIjoxNzUyNTE2OTA3LCJpYXQiOjE3NTI1MTMzMDd9.Yvk64BoxuATomuFELeEhfTto_2BXMYZX1yUUOBbQG0IvTGMko-nzOdM-ht5jaTsP9Ya1myhMzJDiDvsawaQErGBO61WIterZR-4cy541oFhkK7NXPI2ZjXON3TpwAyZaEjb8k-XYAcmTkY6XMQCd47LAmRG5tP6mkhTm2W7pNIVJpHdEAEpKRFMd8pkbWOCRAiPr5K30mYrL8JUJljb8Kq0salB4n1PuyBDL71VEutQX0kbbsb1m14Bx5UgwZ-kLSBJHVsuDpu6tN3z1fvuBxC1ErJyc_GMRK7gXlBZfcdYCpdPc2T0fSwJLMs7iV09M7RZ2lmKv9PBCBCjG26SBFg' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=8F8C7C0FBD6E59DBCBD9C95912B9D25E' \
+--data-raw '{
+    "source":"1d742172-6ea3-46d0-b83e-9553c5879414",
+    "name": "Microsoft 365 Business Basic (no Teams)",
+    "customerTenant": {
+        "id": 123456
+    },
+    "product": {
+        "partNumber": "CFQ7TTC0LH18:000P"
+    },
+    "quantity": 1,
+    "billingCycle": 1,
+    "termDuration": "P1M"
+}'
+
+
+AssignSubsciptionByNewCommerce API:
+
+Use the below curl to assign subscription using new commerce ,
+
+curl --location --request POST 'http://api.axalingroup.com/assignSubsciptionByNewCommerce' \
+--header 'Authorization: Bearer eyJraWQiOiJmYThmZDRjOS03ZDM4LTQwZWUtYjc4Yy1jZjgzMmM1ZjQ4YmIiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJzdWIiOiJjcmF5b25BcHAiLCJhdWQiOiJjcmF5b25BcHAiLCJuYmYiOjE3NTI1MDYzMTgsImV4cCI6MTc1MjUwOTkxOCwiaWF0IjoxNzUyNTA2MzE4fQ.DArexTckGqm6ro0lv0Jur4RD9f5jXPdVPX39YOIhLzrpzzKEUF6LnPPEvtm08W5xUgsoX5gSNxqrIaJ7W_ixExMhCRoGTtQa6qqhIAN2zIgkNKI4EB1EXGCIrQJCkUFOH3bJMtYLzCndKUb5o-2ni1mcDtQjQNGR9Bjp54jgmVKLVdS_2KvNAC7avRsuJaCkIAyX1f_UAwOwQDL83A4vaO_hoer5Qc0Lqov7xIABVUbG8otxtk2Y95ErEiAyu2XKbBX1UJRVid1-KM_OBV8Upx6CwSIgUSFttxeHRYXhBc59Sl9eJLuLYuA4JxzYW2_kmVzImF7KPtIoxh2ln_XDDw' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=8F8C7C0FBD6E59DBCBD9C95912B9D25E' \
+--data-raw '
+{
+ "source":"1d742172-6ea3-46d0-b83e-9553c5879414",
+  "customerTenantId": 123456,
+  "billingCycle": 1,
+  "partNumber": "CFQ7TTC0HD33:0003",
+  "quantity": 1,
+  "termDuration": "P1M",
+  "customTermEndDate": "2022-09-30T23:59:59Z",
+  "scheduledDate": "2023-05-23"
+}'
+
+
+GetCustomerTenantById API:
+
+Use the below curl to get customertenant details by tenant id ,
+
+curl --location --request GET 'http://api.axalingroup.com/getCustomerTenantById/309226?source=Magically_Genius' \
+--header 'Authorization: Bearer eyJraWQiOiI5ZWYwODVjYy03Y2VhLTRmN2EtODlkMC01NDA4ZjYyMjBhZWEiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmF4YWxpbmdyb3VwLmNvbSIsInN1YiI6ImNyYXlvbkFwcCIsImF1ZCI6ImNyYXlvbkFwcCIsIm5iZiI6MTc1MjUwNDY3NiwiZXhwIjoxNzUyNTA4Mjc2LCJpYXQiOjE3NTI1MDQ2NzZ9.J3fN56zRP3bT0RRcbR_6KAUc-zWxIHICHmJw8LdkGYmyS2OPYBeYi_6dtKYbdqGQOdxZ6yRUc8BSYZSmquLXXoRoi3G93eRR9C6JdK6dYGLEFhmHOlSYVDEs26snfjwkBb9jQorjuOz9fsvylWi5eBC_YKROHqTpmcR4PblhpopzmVvQpnu20vR-1_pOptz7UEDo3rGA6Bm3YMt-RLiDQtW43VoMEHRJ9f8cOSmqPUyhwWeu-umgyMWcP1CiVpFdCtO5iVTQwGp8nvrbxf2ZxwUkgYDcWtfpC8B82OAuQ4v49MzztfJigC3PBmKx6H294WYlimOazWTOruh8Bggemw'
+
+
+
+GetSubscriptionById API:
+
+Use the below curl to get subscription detail  by tenant id ,
+
+curl --location --request GET 'http://api.axalingroup.com/getSubscriptionById/873737?source=Magically_Genius' \
+--header 'Authorization: Bearer eyJraWQiOiJhZGE0ZWM0Yy0yYzUwLTQwMTAtODE0Ni0zNDI5ZGJmMzQwMDciLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmF4YWxpbmdyb3VwLmNvbSIsInN1YiI6ImNyYXlvbkFwcCIsImF1ZCI6ImNyYXlvbkFwcCIsIm5iZiI6MTc1MjQyMTU5MCwiZXhwIjoxNzUyNDI1MTkwLCJpYXQiOjE3NTI0MjE1OTB9.fHpRetadzrpRWEIzXeT7EfnYeJjKQ8fs5tyQI4PRpSKwzQcFFNgKHz9DwPzW1sH_DbjZzy7HOCUw_YXwDjPU1fDXvRlvDSOs0-MENnkmc6fdsN8VMxsgHQxwAQ2Ssev-6lX7P5Tx73d1x4EL1ND30uIoeunFkYClbgm-7PP2GIFqBJ7KMvryRNFJd7NLJneTCSjdbnh4klTHL9VlxAFWUbfIK5M28uavZTYEB8bD_yV2TFj0RIRKhwGvP7GuZ-1277crqtEy7fdwJOQMsaPrTVswCX2Ds03u1u6FDA_uee5swbuPcv0OwwlCw_uH4bG1YQQdO_xWfEeuoGmC3k8J_w'
