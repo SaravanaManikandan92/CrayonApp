@@ -41,7 +41,7 @@ public class CrayonController {
         return crayonService.consentAgreement(id,consentAgreement);
     }
 
-    @PostMapping("/assignSubsciption/{id}")
+    @PostMapping("/assignSubsciption")
     public AssignedSubscriptionResponse assignSubscription(@RequestBody @Valid AssignSubscription assignSubscription) {
         return crayonService.createAssignment(assignSubscription);
     }

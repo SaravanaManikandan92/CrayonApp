@@ -119,7 +119,7 @@ public class CrayonService {
             return assignedSubscriptionResponse;
         } catch (Exception ex) {
             Utility.logHere(assignSubscription,"exception",null,ex.getMessage());
-            throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
+            throw new InternalException("Something went wrong while assigning  the new commerceid " + ex.getMessage());
         }
     }
 
