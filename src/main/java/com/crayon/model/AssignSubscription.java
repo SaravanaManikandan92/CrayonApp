@@ -32,7 +32,6 @@ public class AssignSubscription {
     @JsonProperty("name")
     private String name;
 
-    @NotBlank(message =  "Quantity is required")
     @JsonProperty("quantity")
     private int  quantity;
 
