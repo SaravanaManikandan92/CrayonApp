@@ -99,7 +99,7 @@ public class Utility {
                     .addField("email", consentAgreement.getEmail())
                     .addField("phoneNumber", consentAgreement.getPhoneNumber())
                     .addField("dateAgreed", consentAgreement.getDateAgreed())
-                    .addField("agreementType", consentAgreement.getAgreementType());
+                    .addField("agreementType", String.valueOf(consentAgreement.getAgreementType()));
 
             if (reqResp.equalsIgnoreCase("request")) {
                 point
@@ -132,10 +132,10 @@ public class Utility {
             point
                     .addField("type", "request")
                     .addField("name", assignSubscription.getName())
-                    .addField("quantity", assignSubscription.getQuantity())
+                    .addField("quantity", String.valueOf(assignSubscription.getQuantity()))
                     .addField("customerTenant", Optional.ofNullable(assignSubscription.getCustomerTenant()).map(Object::toString).orElse(null))
                     .addField("product", Optional.ofNullable(assignSubscription.getProduct()).map(Object::toString).orElse(null))
-                    .addField("billingCycle", assignSubscription.getBillingCycle())
+                    .addField("billingCycle", String.valueOf(assignSubscription.getBillingCycle()))
                     .addField("termDuration", assignSubscription.getTermDuration());
 
 
@@ -144,10 +144,10 @@ public class Utility {
 
                     .addField("type", "response")
                     .addField("id", assignedSubscriptionResponse.getName())
-                    .addField("publisherSubscriptionId", assignedSubscriptionResponse.getQuantity())
+                    .addField("publisherSubscriptionId", String.valueOf(assignedSubscriptionResponse.getQuantity()))
                     .addField("quantity", Optional.ofNullable(assignedSubscriptionResponse.getCustomerTenant()).map(Object::toString).orElse(null))
                     .addField("name", Optional.ofNullable(assignedSubscriptionResponse.getProduct()).map(Object::toString).orElse(null))
-                    .addField("status", assignedSubscriptionResponse.getStatus())
+                    .addField("status", String.valueOf(assignedSubscriptionResponse.getStatus()))
                     .addField("orderId", assignedSubscriptionResponse.getOrderId())
                     .addField("publisher", Optional.ofNullable(assignedSubscriptionResponse.getPublisher())
                             .map(Object::toString)
@@ -171,13 +171,20 @@ public class Utility {
 //
 //            }
 
-            point.addField("acceptAutoSuspension", assignSubscription.getTermDuration())
-                    .addField("autoSuspensionDate", assignSubscription.getTermDuration())
-                    .addField("availableAddonsCount", assignSubscription.getTermDuration())
-                    .addField("attestationAccepted", assignSubscription.getTermDuration())
-                    .addField("termDuration", assignSubscription.getTermDuration())
-                    .addField("subscriptions", assignSubscription.getTermDuration())
-                    .addField("subscriptionMaxThreshold", assignSubscription.getTermDuration())
+            point
+                    .addField("acceptAutoSuspension", Optional.ofNullable(assignedSubscriptionResponse.getAcceptAutoSuspension())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("autoSuspensionDate", assignedSubscriptionResponse.getAutoSuspensionDate())
+                    .addField("availableAddonsCount", String.valueOf(assignedSubscriptionResponse.getAvailableAddonsCount()))
+                    .addField("attestationAccepted", Optional.ofNullable(assignedSubscriptionResponse.getAttestationAccepted())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("termDuration", assignedSubscriptionResponse.getTermDuration())
+                    .addField("subscriptions",Optional.ofNullable(assignedSubscriptionResponse.getSubscriptions())
+                            .map(Object::toString)
+                            .orElse(null) )
+                    .addField("subscriptionMaxThreshold", String.valueOf(assignedSubscriptionResponse.getSubscriptionMaxThreshold()))
             ;
 
         } else {
@@ -205,10 +212,10 @@ public class Utility {
         if (reqResp.equalsIgnoreCase("request")) {
             point
                     .addField("type", "request")
-                    .addField("customerTenantId", assignSubscription.getCustomerTenantId())
-                    .addField("billingCycle", assignSubscription.getBillingCycle())
+                    .addField("customerTenantId", String.valueOf(assignSubscription.getCustomerTenantId()))
+                    .addField("billingCycle", String.valueOf(assignSubscription.getBillingCycle()))
                     .addField("partNumber", assignSubscription.getPartNumber())
-                    .addField("quantity", assignSubscription.getQuantity())
+                    .addField("quantity", String.valueOf(assignSubscription.getQuantity()))
                     .addField("termDuration", assignSubscription.getTermDuration())
                     .addField("customTermEndDate", assignSubscription.getCustomTermEndDate())
                     .addField("scheduledDate", assignSubscription.getScheduledDate());
@@ -217,7 +224,9 @@ public class Utility {
         } else if (reqResp.equalsIgnoreCase("response")) {
             point
                     .addField("type", "response")
-                    .addField("IsSuccessful", assignedSubscriptionResponse.isIsSuccessful())
+                    .addField("IsSuccessful", Optional.ofNullable(assignedSubscriptionResponse.isIsSuccessful())
+                            .map(Object::toString)
+                            .orElse(null))
                     .addField("ErrorReasonCode", assignedSubscriptionResponse.getErrorReasonCode())
                     .addField("ErrorDescription", assignedSubscriptionResponse.getErrorDescription())
                     .addField("NewCommerceOrderId", assignedSubscriptionResponse.getNewCommerceOrderId())
@@ -299,11 +308,11 @@ public class Utility {
 
                 point
                         .addField("type", "response")
-                        .addField("id",response.getId())
+                        .addField("id",String.valueOf(response.getId()))
                         .addField("publisherSubscriptionId",response.getPublisherSubscriptionId())
-                        .addField("quantity",response.getQuantity())
+                        .addField("quantity",String.valueOf(response.getQuantity()))
                         .addField("name",response.getName()) //
-                        .addField("status",response.getStatus()) //
+                        .addField("status",String.valueOf(response.getStatus())) //
                         .addField("orderId",response.getOrderId())
                         .addField("publisher",Optional.ofNullable(response.getPublisher())
                                 .map(Object::toString)
@@ -320,12 +329,12 @@ public class Utility {
                         .addField("creationDate",response.getCreationDate())
                         .addField("effectiveStartDate",response.getEffectiveStartDate())
                         .addField("commitmentEndDate",response.getCommitmentEndDate())
-                        .addField("acceptAutoSuspension",response.isAcceptAutoSuspension())
+                        .addField("acceptAutoSuspension",String.valueOf(response.isAcceptAutoSuspension()))
                         .addField("autoSuspensionDate",response.getAutoSuspensionDate())
-                        .addField("availableAddonsCount",response.getAvailableAddonsCount())
-                        .addField("attestationAccepted",response.isAttestationAccepted())
+                        .addField("availableAddonsCount",String.valueOf(response.getAvailableAddonsCount()))
+                        .addField("attestationAccepted",String.valueOf(response.isAttestationAccepted()))
                         .addField("termDuration",response.getTermDuration())
-                        .addField("subscriptionMaxTreshold",response.getSubscriptionMaxTreshold())
+                        .addField("subscriptionMaxTreshold",String.valueOf(response.getSubscriptionMaxTreshold()))
                 ;
 
                 int i=0,j= 0;
