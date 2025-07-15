@@ -44,7 +44,7 @@ public class CrayonService {
             ResponseEntity<CreateCustomerTenantResponse> response = restTemplate.postForEntity(url, request, CreateCustomerTenantResponse.class);
             CreateCustomerTenantResponse createCustomerTenantResponse=response.getBody();
             Utility.setTrackingIdAndSource(createCustomerTenantRequest.getSource(),createCustomerTenantRequest.getTrackingId(),createCustomerTenantResponse);
-            Utility.logHere(null,"response",createCustomerTenantResponse,null);
+            Utility.logHere(createCustomerTenantRequest,"response",createCustomerTenantResponse,null);
             return createCustomerTenantResponse ;
         } catch (Exception ex) {
             Utility.logHere(createCustomerTenantRequest,"exception",null,ex.getMessage());
@@ -95,7 +95,7 @@ public class CrayonService {
             ResponseEntity<AssignedSubscriptionResponse> response = restTemplate.postForEntity(url, request, AssignedSubscriptionResponse.class);
             AssignedSubscriptionResponse assignedSubscriptionResponse= response.getBody();
             Utility.setTrackingIdAndSource(assignSubscription.getSource(),assignSubscription.getTrackingId(),assignedSubscriptionResponse);
-            Utility.logHere(null,"response",assignedSubscriptionResponse,null);
+            Utility.logHere(assignSubscription,"response",assignedSubscriptionResponse,null);
             return assignedSubscriptionResponse;
         } catch (Exception ex) {
             Utility.logHere(assignSubscription,"exception",null,ex.getMessage());
@@ -118,7 +118,7 @@ public class CrayonService {
             ResponseEntity<AssignSubscriptionByNewCommerceResponse> response = restTemplate.postForEntity(url, request, AssignSubscriptionByNewCommerceResponse.class);
             AssignSubscriptionByNewCommerceResponse assignedSubscriptionResponse= response.getBody();
             Utility.setTrackingIdAndSource(assignSubscription.getSource(),assignSubscription.getTrackingId(),assignedSubscriptionResponse);
-            Utility.logHere(null,"response",assignedSubscriptionResponse,null);
+            Utility.logHere(assignSubscription,"response",assignedSubscriptionResponse,null);
             return assignedSubscriptionResponse;
         } catch (Exception ex) {
             Utility.logHere(assignSubscription,"exception",null,ex.getMessage());

@@ -10,7 +10,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.Instant;
-import java.util.List;
 
 
 @Data
@@ -20,8 +19,10 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AssignedSubscriptionResponse {
 
+
+
     @JsonProperty("Id")
-    private String id;
+    private int id;
 
 
     @JsonProperty("PublisherSubscriptionId")
@@ -42,12 +43,16 @@ public class AssignedSubscriptionResponse {
     @JsonProperty("OrderId")
     private String orderId;
 
+    @JsonProperty("Publisher")
     private Publisher publisher;
 
+    @JsonProperty("Organization")
     private Organization organization;
 
+    @JsonProperty("CustomerTenant")
     private CustomerTenant customerTenant;
 
+    @JsonProperty("Product")
     private Product product;
 
     @JsonProperty("CreationDate")
@@ -60,10 +65,10 @@ public class AssignedSubscriptionResponse {
     private String commitmentEndDate;
 
     @JsonProperty("SuspensionReasons")
-    private List<String> suspensionReasons;
+    private String suspensionReasons;
 
     @JsonProperty("AcceptAutoSuspension")
-    private boolean acceptAutoSuspension;
+    private Boolean acceptAutoSuspension;
 
     @JsonProperty("AutoSuspensionDate")
     private String autoSuspensionDate;
@@ -72,16 +77,76 @@ public class AssignedSubscriptionResponse {
     private int availableAddonsCount;
 
     @JsonProperty("AttestationAccepted")
-    private boolean attestationAccepted;
+    private Boolean attestationAccepted;
 
     @JsonProperty("TermDuration")
     private String termDuration;
 
     @JsonProperty("Subscriptions")
-    private List<String> subscriptions;
+    private String[] subscriptions;
 
-    @JsonProperty("SubscriptionMaxThreshold")
+    @JsonProperty("SubscriptionMaxTreshold")
     private int subscriptionMaxThreshold;
+
+    @JsonProperty("OriginalAgreementId")
+    private String originalAgreementId;
+
+    @JsonProperty("PurchasePrice")
+    private float purchasePrice;
+
+    @JsonProperty("PurchasePriceCurrency")
+    private String purchasePriceCurrency;
+
+    @JsonProperty("InvoiceProfile")
+    private String invoiceProfile;
+
+    @JsonProperty("EntitlementId")
+    private String entitlementId;
+
+    @JsonProperty("provisionType")
+    private int ProvisionType;
+
+    @JsonProperty("BillingCycle")
+    private int billingCycle;
+
+    @JsonProperty("IsTrial")
+    private Boolean isTrial;
+
+    @JsonProperty("Markup")
+    private float markup;
+
+    @JsonProperty("StartDate")
+    private String startDate;
+
+    @JsonProperty("EndDate")
+    private String endDate;
+
+    @JsonProperty("SubscriptionTags")
+    private String subscriptionTags;
+
+    @JsonProperty("PartNumber")
+    private String partNumber;
+
+    @JsonProperty("CancellationAllowedUntilDate")
+    private String cancellationAllowedUntilDate;
+
+    @JsonProperty("ScheduledNextTermInstructions")
+    private String scheduledNextTermInstructions;
+
+    @JsonProperty("PriceType")
+    private int priceType;
+
+    @JsonProperty("SalesPrice")
+    private float salesPrice;
+
+    @JsonProperty("RegisteredForReservedInstance")
+    private Boolean registeredForReservedInstance;
+
+    @JsonProperty("AutoRenewEnabled")
+    private Boolean autoRenewEnabled;
+
+    @JsonProperty("MaxEndCustomerQuantity")
+    private String maxEndCustomerQuantity;
 
     private Instant timestamp;
 

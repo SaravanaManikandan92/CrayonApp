@@ -1,14 +1,10 @@
 package com.crayon.model;
 
-import com.crayon.constants.Constants;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.http.NameValuePair;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Setter

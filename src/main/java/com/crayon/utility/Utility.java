@@ -165,11 +165,11 @@ public class Utility {
                     .addField("effectiveStartDate", assignedSubscriptionResponse.getEffectiveStartDate())
                     .addField("commitmentEndDate", assignedSubscriptionResponse.getCommitmentEndDate());
             int i = 0;
-            for (String in : assignedSubscriptionResponse.getSuspensionReasons()) {
-                point.addField("suspensionReasons" + i, in);
-                i++;
-
-            }
+//            for (String in : assignedSubscriptionResponse.getSuspensionReasons()) {
+//                point.addField("suspensionReasons" + i, in);
+//                i++;
+//
+//            }
 
             point.addField("acceptAutoSuspension", assignSubscription.getTermDuration())
                     .addField("autoSuspensionDate", assignSubscription.getTermDuration())

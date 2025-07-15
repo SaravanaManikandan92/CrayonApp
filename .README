@@ -87,7 +87,7 @@ curl --location --request POST 'http://api.axalingroup.com/consentAgreement/1234
     }
 '
 
-AssignSubsciption API:
+AssignSubsciption API FOR NCE:
 
 Use the below curl to assign subscription  api,
 

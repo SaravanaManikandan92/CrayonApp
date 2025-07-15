@@ -13,11 +13,9 @@ import lombok.Setter;
 @Setter
 public class CustomerTenant {
 
-    @NotBlank(message="Id should not be null")
     @JsonProperty("Id")
     private int id;
 
-    @NotBlank(message="PublisherCustomerId should not be null")
     @JsonProperty("PublisherCustomerId")
     private String publisherCustomerId;
 }

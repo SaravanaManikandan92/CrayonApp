@@ -13,20 +13,16 @@ import lombok.Setter;
 public class Product {
 
 
-    @NotBlank(message="PartNumber should not be null")
     @JsonProperty("PartNumber")
     private String partNumber;
 
 
-    @NotBlank(message="Id should not be null")
     @JsonProperty("Id")
-    private String id;
+    private int id;
 
-    @NotBlank(message="ItemLegalName should not be null")
     @JsonProperty("ItemLegalName")
     private String itemLegalName;
 
-    @NotBlank(message="ItemName should not be null")
     @JsonProperty("ItemName")
     private String itemName;
 }
