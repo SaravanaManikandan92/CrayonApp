@@ -104,6 +104,35 @@ public class CrayonService {
 
     }
 
+    public SubscriptionUpdate updateSubscription(SubscriptionUpdate updateSubscription,boolean cancel) {
+        try {
+            if(cancel)
+            {
+                updateSubscription.setStatus(Constants.cancelSubscription);
+            }
+            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_TOKEN_ASSIGN_AGREEMENT_URL.getValue();
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
+            httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
+            HttpEntity<SubscriptionUpdate> request = new HttpEntity<>(updateSubscription, httpHeaders);
+            Utility.generateAndSetTrackingId(updateSubscription);
+            //Log here
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(request);
+            System.out.println("Request JSON: " + json);
+            Utility.logHere(updateSubscription,"request",null,null);
+            ResponseEntity<SubscriptionUpdate> response = restTemplate.postForEntity(url, request, SubscriptionUpdate.class);
+            SubscriptionUpdate subscriptionUpdateResp= response.getBody();
+            Utility.setTrackingIdAndSource(updateSubscription.getSource(),updateSubscription.getTrackingId(),subscriptionUpdateResp);
+            Utility.logHere(updateSubscription,"response",subscriptionUpdateResp,null);
+            return subscriptionUpdateResp;
+        } catch (Exception ex) {
+            Utility.logHere(updateSubscription,"exception",null,ex.getMessage());
+            throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
+        }
+
+    }
+
 
     public AssignSubscriptionByNewCommerceResponse createAssignmentByNewCommerceId(AssignSubscriptionByNewCommerce assignSubscription) {
         try {
@@ -193,6 +222,15 @@ public class CrayonService {
     public List<AssignSubscriptionReqResp> GetBySourceInAssignSubscriptionReqResp(String source,String trackingId,String date,String month,String year) {
         try {
             return Utility.getBySourceInAssignSubscriptionReqResp(source,trackingId,date,month,year);
+        } catch (Exception ex) {
+            throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
+        }
+
+    }
+
+    public List<UpdateSubscriptionLogResponse> GetBySourceInUpdateSubscriptionReqResp(String source,String trackingId,String date,String month,String year) {
+        try {
+            return Utility.getBySourceInUpdateSubscriptionReqResp(source,trackingId,date,month,year);
         } catch (Exception ex) {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }

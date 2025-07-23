@@ -198,6 +198,84 @@ public class Utility {
 
     }
 
+    public static void logHere(SubscriptionUpdate subscriptionUpdate, String reqResp,
+                               SubscriptionUpdate subscriptionUpdateResp, String exception) {
+        Point point = Point.measurement("updateSubscriptionReqResp");
+        point
+                .addTag("source", Constants.clientListMap.get(subscriptionUpdate.getSource()))
+                .addTag("trackingId", subscriptionUpdate.getTrackingId())
+                .time(System.currentTimeMillis(), WritePrecision.MS);
+        point
+                .addField("action", "AssignSubscription");
+        if (reqResp.equalsIgnoreCase("request")) {
+            point
+                    .addField("type", "request")
+                    .addField("name", subscriptionUpdate.getName())
+                    .addField("quantity", String.valueOf(subscriptionUpdate.getQuantity()))
+                    .addField("customerTenant", Optional.ofNullable(subscriptionUpdate.getCustomerTenant()).map(Object::toString).orElse(null))
+                    .addField("product", Optional.ofNullable(subscriptionUpdate.getProduct()).map(Object::toString).orElse(null))
+                    .addField("termDuration", subscriptionUpdate.getTermDuration());
+
+
+        } else if (reqResp.equalsIgnoreCase("response")) {
+            point
+
+                    .addField("type", "response")
+                    .addField("id", subscriptionUpdateResp.getName())
+                    .addField("publisherSubscriptionId", String.valueOf(subscriptionUpdateResp.getQuantity()))
+                    .addField("quantity", Optional.ofNullable(subscriptionUpdateResp.getCustomerTenant()).map(Object::toString).orElse(null))
+                    .addField("name", Optional.ofNullable(subscriptionUpdateResp.getProduct()).map(Object::toString).orElse(null))
+                    .addField("status", String.valueOf(subscriptionUpdateResp.getStatus()))
+                    .addField("orderId", subscriptionUpdateResp.getOrderId())
+                    .addField("publisher", Optional.ofNullable(subscriptionUpdateResp.getPublisher())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("organization", Optional.ofNullable(subscriptionUpdateResp.getOrganization())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("customerTenant", Optional.ofNullable(subscriptionUpdateResp.getCustomerTenant())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("product", Optional.ofNullable(subscriptionUpdateResp.getProduct())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("creationDate", subscriptionUpdateResp.getCreationDate())
+                    .addField("effectiveStartDate", subscriptionUpdateResp.getEffectiveStartDate())
+                    .addField("commitmentEndDate", subscriptionUpdateResp.getCommitmentEndDate());
+            int i = 0;
+//            for (String in : assignedSubscriptionResponse.getSuspensionReasons()) {
+//                point.addField("suspensionReasons" + i, in);
+//                i++;
+//
+//            }
+
+            point
+                    .addField("acceptAutoSuspension", Optional.ofNullable(subscriptionUpdateResp.isAcceptAutoSuspension())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("autoSuspensionDate", subscriptionUpdateResp.getAutoSuspensionDate())
+                    .addField("availableAddonsCount", String.valueOf(subscriptionUpdateResp.getAvailableAddonsCount()))
+                    .addField("attestationAccepted", Optional.ofNullable(subscriptionUpdateResp.isAttestationAccepted())
+                            .map(Object::toString)
+                            .orElse(null))
+                    .addField("termDuration", subscriptionUpdateResp.getTermDuration())
+                    .addField("subscriptions",Optional.ofNullable(subscriptionUpdateResp.getSubscriptions())
+                            .map(Object::toString)
+                            .orElse(null) )
+                    .addField("subscriptionMaxThreshold", String.valueOf(subscriptionUpdateResp.getSubscriptionMaxTreshold()))
+            ;
+
+        } else {
+            point
+                    .addField("type", "exception")
+                    .addField("Exception", exception);
+
+        }
+        WriteApi writeApi = InfluxDbFactory.getWriteApiInstance();
+        writeApi.writePoint(point);
+
+    }
+
     public static void logHere(AssignSubscriptionByNewCommerce assignSubscription, String reqResp,
                                AssignSubscriptionByNewCommerceResponse assignedSubscriptionResponse, String exception) {
         Point point = Point.measurement("assignSubscriptionNewCommerceReqResp");
@@ -361,7 +439,8 @@ public class Utility {
     }
 
 
-    public static List<CreateCustomerTenantReqResp> getBySourceInCreateCustomerTenantReqResp(String source, String trackingId,String date,String month,String year) {
+    public static List<CreateCustomerTenantReqResp> getBySourceInCreateCustomerTenantReqResp(String source, String trackingId,String date,
+                                                                                             String month,String year) {
 
 
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
@@ -608,6 +687,102 @@ public class Utility {
 
         return new ArrayList<>(grouped.values());
     }
+
+
+    public static List<UpdateSubscriptionLogResponse> getBySourceInUpdateSubscriptionReqResp(String source, String trackingId,String date,String month,String year) {
+
+
+        InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
+        Point point = null;
+
+        String flux = "from(bucket: \"" + Constants.INFLUX_BUCKET + "\")\n" ;
+
+        if (date != null && month==null) {
+
+            LocalDate localDate = LocalDate.parse(date);
+            Instant startOfDay = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: "+startOfDay.toString()+ ",stop: "+endOfDay.toString()+")\n"
+            ;
+        }
+        else if (month != null) {
+            int year_ = getYear(year);
+            month=Integer.parseInt(month)>9?month:"0"+month;
+            String currDate = year_ + "-" + month + "-01";
+            LocalDate localDate = LocalDate.parse(currDate);
+            Instant startOfMonth = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+            Instant endOfDay = localDate.plusDays(getDaysInMonth(Integer.parseInt(month), year_)).atStartOfDay(ZoneOffset.UTC).toInstant().minusNanos(1);
+            flux = flux +
+                    "  |> range(start: " + startOfMonth.toString() + ",stop: " + endOfDay.toString() + ")\n"
+            ;
+        } else {
+            flux = flux +
+                    "  |> range(start: -365d)\n";
+        }
+        if (trackingId != null) {
+            flux = flux +
+                    "  |> filter(fn: (r) => r.trackingId == \"" + trackingId + "\")"
+            ;
+        }
+
+        flux = flux +
+                "  |> filter(fn: (r) => r._measurement == \"updateSubscriptionReqResp\")\n" +
+                "  |> filter(fn: (r) => r.source == \"" + source + "\")";
+
+
+        QueryApi queryApi = InfluxDbFactory.getQueryApiInstance();
+        List<FluxTable> tables = queryApi.query(flux, Constants.INFLUX_ORG);
+
+        Map<Instant, UpdateSubscriptionLogResponse> grouped = new HashMap<>();
+
+        for (FluxTable table : tables) {
+            for (FluxRecord record : table.getRecords()) {
+                Instant time = record.getTime();
+                UpdateSubscriptionLogResponse resp = grouped.getOrDefault(time, new UpdateSubscriptionLogResponse());
+
+                resp.setTimestamp(time);
+
+                // Tags
+                Map<String, Object> tags = record.getValues();
+                if (tags.containsKey("trackingId")) resp.setTrackingId((String) tags.get("trackingId"));
+                if (tags.containsKey("source")) resp.setSource((String) tags.get("source"));
+
+
+                // Fields
+                switch (record.getField()) {
+                    case "action" -> resp.setAction((String) record.getValue());
+                    case "type" -> resp.setType((String) record.getValue());
+                    case "id" -> resp.setId(Integer.parseInt((String) record.getValue()));
+                    case "publisherSubscriptionId" -> resp.setPublisherSubscriptionId((String) record.getValue());
+                    case "quantity" -> resp.setQuantity((Integer) record.getValue());
+                    case "name" -> resp.setName((String) record.getValue());
+                    case "status" -> resp.setStatus((Integer) record.getValue());
+                    case "orderId" -> resp.setOrderId((String) record.getValue());
+                    case "publisher" -> resp.setPublisher((Publisher) record.getValue());
+                    case "organization" -> resp.setOrganization((Organization) record.getValue());
+                    case "customerTenant" -> resp.setCustomerTenant((CustomerTenant) record.getValue());
+                    case "product" -> resp.setProduct((Product) record.getValue());
+                    case "creationDate" -> resp.setCreationDate((String) record.getValue());
+                    case "effectiveStartDate" -> resp.setEffectiveStartDate((String) record.getValue());
+                    case "commitmentEndDate" -> resp.setCommitmentEndDate((String) record.getValue());
+                    case "suspensionReasons1" -> resp.setSuspensionReasons((String) record.getValue());
+                    case "acceptAutoSuspension" -> resp.setAcceptAutoSuspension((Boolean) record.getValue());
+                    case "autoSuspensionDate" -> resp.setAutoSuspensionDate((String) record.getValue());
+                    case "availableAddonsCount" -> resp.setAvailableAddonsCount((Integer) record.getValue());
+                    case "attestationAccepted" -> resp.setAttestationAccepted((Boolean) record.getValue());
+                    case "termDuration" -> resp.setTermDuration((String) record.getValue());
+                    case "subscriptions" -> resp.setSubscriptions((String[]) record.getValue());
+                    case "subscriptionMaxThreshold" -> resp.setSubscriptionMaxTreshold((Integer) record.getValue());
+                }
+
+                grouped.put(time, resp);
+            }
+        }
+
+        return new ArrayList<>(grouped.values());
+    }
+
 
     public static List<AssignSubscriptionByNewCommerceLogResponse> getBySourceInAssignSubscriptionNewCommerceReqResp(String source, String trackingId,String date,String month,String year) {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();// InfluxDBClientFactory.create(Constants.INFLUX_URL, Constants.INFLUX_TOKEN.toCharArray());
@@ -869,6 +1044,10 @@ public class Utility {
         assignSubscription.setTrackingId(generateTrackingId(assignSubscription.getSource()));
     }
 
+    public static void generateAndSetTrackingId(SubscriptionUpdate subscriptionUpdate) {
+        subscriptionUpdate.setTrackingId(generateTrackingId(subscriptionUpdate.getSource()));
+    }
+
     public static void generateAndSetTrackingId(AssignSubscriptionByNewCommerce assignSubscriptionByNewCommerce) {
         assignSubscriptionByNewCommerce.setTrackingId(generateTrackingId(assignSubscriptionByNewCommerce.getSource()));
     }
@@ -893,7 +1072,10 @@ public class Utility {
         assignedSubscriptionResponse.setSource(source);
     }
 
-
+    public static void setTrackingIdAndSource(String source, String trackingId, SubscriptionUpdate subscriptionUpdateResp) {
+        subscriptionUpdateResp.setTrackingId(trackingId);
+        subscriptionUpdateResp.setSource(source);
+    }
     public static int getDaysInMonth(int month,int year) {
 
         if (month == 2 && isLeapYear(year)) {

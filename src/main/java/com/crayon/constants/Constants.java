@@ -31,6 +31,8 @@ public class Constants {
     public static int Cheap_Inbox_INVOICE_ID=212451;
     public static int Axalin_INVOICE_ID=203480;
 
+    public static int cancelSubscription=4;
+
     public static Map<String,String> invoiceMap = Map.ofEntries(
             Map.entry("57747f5d-6758-4afa-9d65-0a3097b68389", "207443"),
             Map.entry("dd636335-efbe-491b-b3b3-d8225c8dc1d1", "180723"), // default February
@@ -64,6 +66,7 @@ public class Constants {
         GRANT_TYPE("","password"),
         SCOPE("","CustomerApi"),
         CRAYON_BASE_URL("CRAYON_BASE_URL","https://api.crayon.com/api/"),
+        CRAYON_BASE_URL_HTTP("CRAYON_BASE_URL_HTTP","http://api.crayon.com/api/"),
         CRAYON_TOKEN_API_URL("CRAYON_TOKEN_API_URL", "v1/connect/token"),
         CRAYON_TOKEN_CREATE_TENANT_API_URL("CRAYON_TOKEN_CREATE_TENANT_API_URL","v1/customertenants/"),
         CRAYON_TOKEN_CONSENT_AGREEMENT_URL("","v1/customertenants/"),

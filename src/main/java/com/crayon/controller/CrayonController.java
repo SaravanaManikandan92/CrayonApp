@@ -46,6 +46,11 @@ public class CrayonController {
         return crayonService.createAssignment(assignSubscription);
     }
 
+    @PutMapping("/updateOrCancelSubscription")
+    public SubscriptionUpdate updateSubscription(@RequestBody @Valid SubscriptionUpdate subscriptionUpdate,@PathVariable boolean cancel) {
+        return crayonService.updateSubscription(subscriptionUpdate,cancel);
+    }
+
     @PostMapping("/assignSubsciptionByNewCommerce")
     public AssignSubscriptionByNewCommerceResponse assignSubscriptionByNewCommerceId(@RequestBody @Valid AssignSubscriptionByNewCommerce assignSubscription) {
         return crayonService.createAssignmentByNewCommerceId(assignSubscription);
@@ -94,6 +99,15 @@ public class CrayonController {
 
     }
 
+
+    @GetMapping("/getBySourceInUpdateSubscriptionReqResp")
+    public ResponseEntity< List<UpdateSubscriptionLogResponse>> GetBySourceInUpdateSubscriptionReqResp(String source,String trackingId,String date,String month,String year) {
+
+        List<UpdateSubscriptionLogResponse> resp=crayonService.GetBySourceInUpdateSubscriptionReqResp(source,trackingId,date,month,year);
+        return ResponseEntity.ok(resp);
+
+    }
+
     @GetMapping("/getBySourceInGetByTenantId")
     public ResponseEntity< List<TenantResponse>> GetBySourceInGetByTenantId(String source,String trackingId,String date,String month,String year) {
 
@@ -109,6 +123,8 @@ public class CrayonController {
         return ResponseEntity.ok(resp);
 
     }
+
+
 
     //http://localhost:8080/oauth2/token - to get Oauth to access this application
 }
