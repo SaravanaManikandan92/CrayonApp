@@ -68,7 +68,8 @@ public class CrayonController {
     }
 
     @GetMapping("/getCreateCustomerTenantReqRespBySource")
-    public ResponseEntity<List<CreateCustomerTenantReqResp>> GetCreateCustomerTenantReqRespBySource(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
+    public ResponseEntity<List<CreateCustomerTenantReqResp>> GetCreateCustomerTenantReqRespBySource(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,
+                                                                                                    @RequestParam(required = false) String month,@RequestParam(required = false) String year) {
 
         List<CreateCustomerTenantReqResp> resp=crayonService.GetCreateCustomerTenantReqRespBySource(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
@@ -76,7 +77,7 @@ public class CrayonController {
     }
 
     @GetMapping("/getBySourceInConsentAgreementReqResp")
-    public ResponseEntity<List<ConsentAgreementReqResp>> GetBySourceInConsentAgreementReqResp(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
+    public ResponseEntity<List<ConsentAgreementReqResp>> GetBySourceInConsentAgreementReqResp(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,@RequestParam(required = false) String month,@RequestParam(required = false) String year) {
 
         List<ConsentAgreementReqResp> resp=crayonService.GetBySourceInConsentAgreementReqResp(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
@@ -84,7 +85,7 @@ public class CrayonController {
     }
 
     @GetMapping("/getBySourceInAssignSubscriptionReqResp")
-    public ResponseEntity<List<AssignSubscriptionReqResp>> GetBySourceInAssignSubscriptionReqResp(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
+    public ResponseEntity<List<AssignSubscriptionReqResp>> GetBySourceInAssignSubscriptionReqResp(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,@RequestParam(required = false) String month,@RequestParam(required = false) String year) {
 
         List<AssignSubscriptionReqResp> resp=crayonService.GetBySourceInAssignSubscriptionReqResp(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
@@ -92,7 +93,7 @@ public class CrayonController {
     }
 
     @GetMapping("/getBySourceInAssignSubscriptionNewCommerceReqResp")
-    public ResponseEntity<List<AssignSubscriptionByNewCommerceLogResponse>> GetBySourceInAssignSubscriptionNewCommerceReqResp(@RequestParam(value="source") String source,String trackingId,String date,String month,String year) {
+    public ResponseEntity<List<AssignSubscriptionByNewCommerceLogResponse>> GetBySourceInAssignSubscriptionNewCommerceReqResp(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,@RequestParam(required = false) String month,@RequestParam(required = false) String year) {
 
         List<AssignSubscriptionByNewCommerceLogResponse> resp=crayonService.GetBySourceInAssignSubscriptionNewCommerceReqResp(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
@@ -101,7 +102,7 @@ public class CrayonController {
 
 
     @GetMapping("/getBySourceInUpdateSubscriptionReqResp")
-    public ResponseEntity< List<UpdateSubscriptionLogResponse>> GetBySourceInUpdateSubscriptionReqResp(String source,String trackingId,String date,String month,String year) {
+    public ResponseEntity< List<UpdateSubscriptionLogResponse>> GetBySourceInUpdateSubscriptionReqResp(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,@RequestParam(required = false) String month,@RequestParam(required = false) String year) {
 
         List<UpdateSubscriptionLogResponse> resp=crayonService.GetBySourceInUpdateSubscriptionReqResp(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
@@ -109,7 +110,7 @@ public class CrayonController {
     }
 
     @GetMapping("/getBySourceInGetByTenantId")
-    public ResponseEntity< List<TenantResponse>> GetBySourceInGetByTenantId(String source,String trackingId,String date,String month,String year) {
+    public ResponseEntity< List<TenantResponse>> GetBySourceInGetByTenantId(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,@RequestParam(required = false) String month,@RequestParam(required = false) String year) {
 
         List<TenantResponse> resp=crayonService.GetBySourceInGetByTenantId(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
@@ -117,7 +118,7 @@ public class CrayonController {
     }
 
     @GetMapping("/getBySourceInGetBySubscriptionId")
-    public ResponseEntity< List<SubscriptionLogResponse>> getBySourceInGetBySubscriptionId(String source,String trackingId,String date,String month,String year) {
+    public ResponseEntity< List<SubscriptionLogResponse>> getBySourceInGetBySubscriptionId(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,@RequestParam(required = false) String month,@RequestParam(required = false) String year) {
 
         List<SubscriptionLogResponse> resp=crayonService.getBySourceInGetBySubscriptionId(source,trackingId,date,month,year);
         return ResponseEntity.ok(resp);
