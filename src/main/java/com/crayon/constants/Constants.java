@@ -19,7 +19,8 @@ public class Constants {
           Map.entry("36ef3b68-aae4-4521-b367-8cefeff85b29","Receptive_Marketing")
   );
    // public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw=="; //this is local
-    public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA=="; //
+
+    public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA=="; //this is prod
    // public static String INFLUX_ORG ="SaraOrg";//"f086a9856ff86826" // //AxelOrg //"SaraOrg" //this is local
     public static String INFLUX_ORG ="AxelOrg";
     public static String INFLUX_BUCKET ="CrayonAudit";
