@@ -47,7 +47,7 @@ public class CrayonController {
     }
 
     @PutMapping("/updateOrCancelSubscription")
-    public SubscriptionUpdate updateSubscription(@RequestBody @Valid SubscriptionUpdate subscriptionUpdate,@PathVariable boolean cancel) {
+    public SubscriptionUpdate updateSubscription(@RequestBody @Valid SubscriptionUpdate subscriptionUpdate,@RequestParam(required = false) boolean cancel) {
         return crayonService.updateSubscription(subscriptionUpdate,cancel);
     }
 
