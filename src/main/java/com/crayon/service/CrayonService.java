@@ -121,7 +121,13 @@ public class CrayonService {
             String json = mapper.writeValueAsString(request);
             System.out.println("Request JSON: " + json);
             Utility.logHere(updateSubscription,"request",null,null);
-            ResponseEntity<SubscriptionUpdate> response = restTemplate.postForEntity(url, request, SubscriptionUpdate.class);
+         ;
+            ResponseEntity<SubscriptionUpdate> response =    restTemplate.exchange(
+                    url,
+                    HttpMethod.PUT,
+                    request,
+                    SubscriptionUpdate.class
+            );
             SubscriptionUpdate subscriptionUpdateResp= response.getBody();
             Utility.setTrackingIdAndSource(updateSubscription.getSource(),updateSubscription.getTrackingId(),subscriptionUpdateResp);
             Utility.logHere(updateSubscription,"response",subscriptionUpdateResp,null);
