@@ -104,13 +104,13 @@ public class CrayonService {
 
     }
 
-    public SubscriptionUpdate updateSubscription(SubscriptionUpdate updateSubscription,boolean cancel) {
+    public SubscriptionUpdate updateSubscription(String id,SubscriptionUpdate updateSubscription,boolean cancel) {
         try {
             if(cancel)
             {
                 updateSubscription.setStatus(Constants.cancelSubscription);
             }
-            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_TOKEN_ASSIGN_AGREEMENT_URL.getValue();
+            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_TOKEN_ASSIGN_AGREEMENT_URL.getValue()+id;
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
             httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());

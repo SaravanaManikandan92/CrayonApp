@@ -46,9 +46,9 @@ public class CrayonController {
         return crayonService.createAssignment(assignSubscription);
     }
 
-    @PutMapping("/updateOrCancelSubscription")
-    public SubscriptionUpdate updateSubscription(@RequestBody @Valid SubscriptionUpdate subscriptionUpdate,@RequestParam(required = false) boolean cancel) {
-        return crayonService.updateSubscription(subscriptionUpdate,cancel);
+    @PutMapping("/updateOrCancelSubscription/{id}")
+    public SubscriptionUpdate updateSubscription(@PathVariable String id,@RequestBody @Valid SubscriptionUpdate subscriptionUpdate,@RequestParam(required = false) boolean cancel) {
+        return crayonService.updateSubscription(id,subscriptionUpdate,cancel);
     }
 
     @PostMapping("/assignSubsciptionByNewCommerce")
