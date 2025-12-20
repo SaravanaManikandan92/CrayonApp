@@ -18,10 +18,10 @@ public class Constants {
           Map.entry("1d742172-6ea3-46d0-b83e-9553c5879414","axalin"),
           Map.entry("36ef3b68-aae4-4521-b367-8cefeff85b29","Receptive_Marketing")
   );
-    public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw==";
-   // public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA=="; //
-    public static String INFLUX_ORG ="SaraOrg";//"f086a9856ff86826" // //AxelOrg //"SaraOrg"
-   // public static String INFLUX_ORG ="AxelOrg";
+   // public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw=="; //this is local
+    public static String INFLUX_TOKEN ="my-super-token";//;"Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA=="; //
+   // public static String INFLUX_ORG ="SaraOrg";//"f086a9856ff86826" // //AxelOrg //"SaraOrg" //this is local
+    public static String INFLUX_ORG ="AxelOrg";
     public static String INFLUX_BUCKET ="CrayonAudit";
     public static String INFLUX_URL ="http://localhost:8086";
     public static String INFLUX_URL_QUERY ="http://localhost:8086/api/v2/query";
