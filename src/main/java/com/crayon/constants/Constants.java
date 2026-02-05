@@ -8,7 +8,7 @@ public class Constants {
 
     public static List<String> clientList = Arrays.asList("57747f5d-6758-4afa-9d65-0a3097b68389","dd636335-efbe-491b-b3b3-d8225c8dc1d1",
             "6434afd2-811c-400c-ac13-d133b476086a","30b1b92c-cd3c-46c2-8375-de13cb5d20ae","1d742172-6ea3-46d0-b83e-9553c5879414",
-            "36ef3b68-aae4-4521-b367-8cefeff85b29");
+            "36ef3b68-aae4-4521-b367-8cefeff85b29","999668d6-5b49-4ea3-aa2a-00856183c0e9");
   //  public static List<String> clientList = Arrays.asList("Magically_Genius","Outbox_Labs","MicroSaaS_Labs","Cheap_Inbox");
   public static Map<String,String> clientListMap = Map.ofEntries(
           Map.entry("57747f5d-6758-4afa-9d65-0a3097b68389", "Magically_Genius"),
@@ -16,7 +16,8 @@ public class Constants {
           Map.entry("6434afd2-811c-400c-ac13-d133b476086a", "MicroSaaS_Labs"),
           Map.entry("30b1b92c-cd3c-46c2-8375-de13cb5d20ae", "Cheap_Inbox"),
           Map.entry("1d742172-6ea3-46d0-b83e-9553c5879414","axalin"),
-          Map.entry("36ef3b68-aae4-4521-b367-8cefeff85b29","Receptive_Marketing")
+          Map.entry("36ef3b68-aae4-4521-b367-8cefeff85b29","Receptive_Marketing"),
+          Map.entry("999668d6-5b49-4ea3-aa2a-00856183c0e9","Mailin-Ai")
   );
    // public static String INFLUX_TOKEN ="Kq7seBQiRWyqbkF4DYe5mH-6FkVoyW6xTXF5LzGsBihqTpkULkXBfLhYhtyyBA9tdgTN3SPrDeitO6on-_cEdA==";//"Token A7MJiqEvG-3B-n5geDnVWQ_61KnpWbLpueTPywlr7PrsX19YTqXyikVuTnjnshDOEVv9-1wUa7XSMbSnxjm0Tw=="; //this is local
 
@@ -45,7 +46,8 @@ public class Constants {
             Map.entry("6434afd2-811c-400c-ac13-d133b476086a", "211425"),
             Map.entry("30b1b92c-cd3c-46c2-8375-de13cb5d20ae", "212451"),
             Map.entry("1d742172-6ea3-46d0-b83e-9553c5879414","203480"),
-            Map.entry("36ef3b68-aae4-4521-b367-8cefeff85b29","213628")
+            Map.entry("36ef3b68-aae4-4521-b367-8cefeff85b29","213628"),
+            Map.entry("999668d6-5b49-4ea3-aa2a-00856183c0e9","222776")
     );//203480
 
     public static final Map<Integer, Integer> baseMonthDateMap = Map.ofEntries(
