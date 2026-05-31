@@ -67,6 +67,14 @@ public class CrayonController {
         return crayonService.getSubscriptionById(id,source);
     }
 
+    @GetMapping("/getSubscriptionByTenantId/{id}")
+    public ResponseEntity<ListOfSubscriptionResponse> getSubscriptionByTenantId(@PathVariable String id, @RequestParam String source) {
+
+        ListOfSubscriptionResponse resp=crayonService.getSubscriptionByTenantId(id,source);
+        return ResponseEntity.ok(resp);
+
+    }
+
     @GetMapping("/getCreateCustomerTenantReqRespBySource")
     public ResponseEntity<List<CreateCustomerTenantReqResp>> GetCreateCustomerTenantReqRespBySource(@RequestParam(value="source") String source,@RequestParam(required = false) String trackingId,@RequestParam(required = false) String date,
                                                                                                     @RequestParam(required = false) String month,@RequestParam(required = false) String year) {
@@ -124,6 +132,8 @@ public class CrayonController {
         return ResponseEntity.ok(resp);
 
     }
+
+
 
 
 

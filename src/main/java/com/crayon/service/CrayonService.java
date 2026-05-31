@@ -183,6 +183,7 @@ public class CrayonService {
         }
     }
 
+
     public SubscriptionResponse getSubscriptionById(String id, String source) {
         try {
             String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_GET_SUBSCRIPTION_BY_ID.getValue();
@@ -204,6 +205,31 @@ public class CrayonService {
             throw new InternalException("Something went wrong while creating the tenant " + ex.getMessage());
         }
     }
+
+    public ListOfSubscriptionResponse getSubscriptionByTenantId(String id,String source) {
+        try {
+            String url = Constants.ClientDetails.CRAYON_BASE_URL.getValue()+Constants.ClientDetails.CRAYON_GET_SUBSCRIPTION_BY_TENANT_ID.getValue();
+            url=url.replace("value1",String.valueOf(Constants.ORGANIZATION_ID));
+            url=url.replace("value2",id);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_JSON); // No charset needed
+            httpHeaders.add("Authorization", "Bearer " + tokenCache.getToken());
+            //Log here
+            Utility.logHere(source,id,null,"request",null);
+            HttpEntity<Void> requestEntity = new HttpEntity<>(httpHeaders);
+
+            ResponseEntity<ListOfSubscriptionResponse> response = restTemplate.exchange(
+                    url, HttpMethod.GET, requestEntity, ListOfSubscriptionResponse.class);
+            ListOfSubscriptionResponse response_=response.getBody();
+            Utility.logGetSubscriptionListById(source,id,response_,"response",null);
+            return response_;
+        } catch (Exception ex) {
+           ex.printStackTrace();
+            Utility.logGetSubscriptionListById(source,id,null,"response",null);
+            throw new InternalException("Something went wrong while getTenantById " + ex.getMessage());
+        }
+    }
+
 
     public List<CreateCustomerTenantReqResp> GetCreateCustomerTenantReqRespBySource(String source,String trackingId,String date,String month,String year) {
         try {

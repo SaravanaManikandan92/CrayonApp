@@ -360,6 +360,20 @@ public class Utility {
 
     }
 
+    public static void logGetSubscriptionListById(String source, String id, ListOfSubscriptionResponse response, String reqResp,
+
+                                              String exception) {
+
+        if(response!=null){
+            for (SubscriptionResponse sub: response.getSubscriptionResponseList()
+            ) {
+                logGetSubscriptionById(source,id,sub,reqResp,exception);
+            }
+        }
+
+    }
+
+
     public static void logGetSubscriptionById(String source, String id, SubscriptionResponse response, String reqResp,
                                String exception) {
         InfluxDBClient client = InfluxDbFactory.getInfluxDBClientInstance();

@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 
-import java.util.List;
 
 
 @Data
@@ -39,6 +38,11 @@ public class SubscriptionResponse {
     @JsonProperty("Quantity")
     private int quantity;
 
+    @JsonProperty("RenewalType")
+    private int renewalType;
+
+    @JsonProperty("RenewalEffectiveDate")
+    private String renewalEffectiveDate;
 
     @JsonProperty("Name")
     private String name;
@@ -47,6 +51,9 @@ public class SubscriptionResponse {
     @JsonProperty("Status")
     private int status;
 
+
+    @JsonProperty("State")
+    private String state;
 
     @JsonProperty("OrderId")
     private String orderId;
@@ -57,8 +64,13 @@ public class SubscriptionResponse {
     @JsonProperty("EndDate")
     private String endDate;
 
+//    @JsonProperty("SubscriptionTags")
+//    private String subscriptionTags;
+
+
     @JsonProperty("SubscriptionTags")
-    private String subscriptionTags;
+    private SubscriptionTags subscriptionTags;
+
 
     @JsonProperty("PartNumber")
     private String partNumber;
@@ -82,6 +94,9 @@ public class SubscriptionResponse {
 
     @JsonProperty("CreationDate")
     private String creationDate;
+
+    @JsonProperty("SubscriptionMaxTresholdQuantity")
+    private String subscriptionMaxTresholdQuantity;
 
     @JsonProperty("EffectiveStartDate")
     private String effectiveStartDate;
