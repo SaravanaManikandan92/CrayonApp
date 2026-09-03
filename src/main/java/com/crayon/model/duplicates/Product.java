@@ -25,4 +25,7 @@ public class Product {
 
     @JsonProperty("ItemName")
     private String itemName;
+
+    @JsonProperty("PublisherProductId")
+    private String publisherProductId;
 }

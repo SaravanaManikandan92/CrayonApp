@@ -72,7 +72,7 @@ public class SubscriptionUpdate {
     private String suspensionReasons;
 
     @JsonProperty("AcceptAutoSuspension")
-    private boolean acceptAutoSuspension;
+    private Boolean acceptAutoSuspension;
 
     @JsonProperty("AutoSuspensionDate")
     private String autoSuspensionDate;
@@ -80,8 +80,11 @@ public class SubscriptionUpdate {
     @JsonProperty("AvailableAddonsCount")
     private int availableAddonsCount;
 
+    @JsonProperty("ProvisionType")
+    private int provisionType;
+
     @JsonProperty("AttestationAccepted")
-    private boolean attestationAccepted;
+    private Boolean attestationAccepted;
 
     @JsonProperty("TermDuration")
     private String termDuration;
@@ -89,8 +92,75 @@ public class SubscriptionUpdate {
     @JsonProperty("Subscriptions")
     private String[] subscriptions;
 
+    @JsonProperty("OriginalAgreementId")
+    private String originalAgreementId;
+
     @JsonProperty("SubscriptionMaxTreshold")
     private int subscriptionMaxTreshold;
+
+    @JsonProperty("PurchasePrice")
+    private float purchasePrice;
+
+    @JsonProperty("PurchasePriceCurrency")
+    private String purchasePriceCurrency;
+
+    @JsonProperty("InvoiceProfile")
+    private String invoiceProfile;
+
+    @JsonProperty("EntitlementId")
+    private String entitlementId;
+
+    @JsonProperty("BillingCycle")
+    private int billingCycle;
+
+    @JsonProperty("Markup")
+    private float markUp;
+
+    @JsonProperty("IsTrial")
+    private boolean isTrial;
+
+    @JsonProperty("StartDate")
+    private String startDate;
+
+    @JsonProperty("EndDate")
+    private String endDate;
+
+    @JsonProperty("PriceType")
+    private int priceType;
+
+    @JsonProperty("SalesPrice")
+    private float salesPrice;
+
+    @JsonProperty("RegisteredForReservedInstance")
+    private boolean registeredForReservedInstance;
+
+
+    @JsonProperty("SubscriptionTags")
+    private String subscriptionTags;
+
+    @JsonProperty("PartNumber")
+    private String partNumber;
+
+
+    @JsonProperty("AutoRenewEnabled")
+    private boolean autoRenewEnabled;
+
+
+    @JsonProperty("CancellationAllowedUntilDate")
+    private String cancellationAllowedUntilDate;
+
+    @JsonProperty("ScheduledNextTermInstructions")
+    private String scheduledNextTermInstructions;
+
+    @JsonProperty("MaxEndCustomerQuantity")
+    private String maxEndCustomerQuantity;
+
+    @JsonProperty("RenewalType")
+    private String renewalType;
+
+    @JsonProperty("RenewalEffectiveDate")
+    private String renewalEffectiveDate;
+
 
 
 }

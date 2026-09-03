@@ -250,12 +250,12 @@ public class Utility {
 //            }
 
             point
-                    .addField("acceptAutoSuspension", Optional.ofNullable(subscriptionUpdateResp.isAcceptAutoSuspension())
+                    .addField("acceptAutoSuspension", Optional.ofNullable(subscriptionUpdateResp.getAcceptAutoSuspension())
                             .map(Object::toString)
                             .orElse(null))
                     .addField("autoSuspensionDate", subscriptionUpdateResp.getAutoSuspensionDate())
                     .addField("availableAddonsCount", String.valueOf(subscriptionUpdateResp.getAvailableAddonsCount()))
-                    .addField("attestationAccepted", Optional.ofNullable(subscriptionUpdateResp.isAttestationAccepted())
+                    .addField("attestationAccepted", Optional.ofNullable(subscriptionUpdateResp.getAttestationAccepted())
                             .map(Object::toString)
                             .orElse(null))
                     .addField("termDuration", subscriptionUpdateResp.getTermDuration())
